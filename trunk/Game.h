@@ -20,6 +20,7 @@
 #include "Music.h"
 #include "Sound.h"
 #include "Particles.h"
+#include "Sprite.h"
 
 //static classes
 #include "Key.h"
@@ -27,6 +28,7 @@
 #include "Mouse.h"
 #include "Joystick.h"
 #include "Fog.h"
+#include "Mathf.h"
 
 
 //game

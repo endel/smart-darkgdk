@@ -146,138 +146,13 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Source Files"
-			Filter="txt;cpp;h&quot;n"
+			Name="Smart DarkGDK"
 			>
-			<File
-				RelativePath=".\Main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ReadMe.txt"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="DarkGDK"
-			>
-			<File
-				RelativePath=".\Game.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Game.h"
-				>
-			</File>
 			<Filter
-				Name="headers"
+				Name="Cpp"
 				>
 				<File
-					RelativePath=".\Camera.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CommonObject.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CommonSound.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Effect.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Fog.h"
-					>
-				</File>
-				<File
-					RelativePath=".\GlobalLight.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Image.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Joystick.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Key.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Light.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Matrix.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Matrix4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Mesh.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Mouse.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Music.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Object.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Particles.h"
-					>
-				</File>
-				<File
-					RelativePath=".\PixelShader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Sound.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Sprite.h"
-					>
-				</File>
-				<File
-					RelativePath=".\String.h"
-					>
-				</File>
-				<File
-					RelativePath=".\VertexShader.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="cpp"
-				>
-				<File
-					RelativePath=".\Camera.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CommonObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CommonSound.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Effect.cpp"
+					RelativePath=".\AnimationClip.cpp"
 					>
 				</File>
 				<File
@@ -285,11 +160,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\GlobalLight.cpp"
+					RelativePath=".\Game.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Image.cpp"
+					RelativePath=".\GlobalLight.cpp"
 					>
 				</File>
 				<File
@@ -301,19 +176,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Light.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Matrix.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Matrix4.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Mesh.cpp"
+					RelativePath=".\Mathf.cpp"
 					>
 				</File>
 				<File
@@ -321,45 +184,217 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Music.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Object.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Particles.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\PixelShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sound.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sprite.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\String.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\VertexShader.cpp"
+				<Filter
+					Name="CommomObjects"
 					>
-				</File>
+					<File
+						RelativePath=".\Camera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CommonObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Effect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Image.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Light.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Matrix.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Matrix4.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Mesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Object.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Particles.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\PixelShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprite.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\VertexShader.cpp"
+						>
+					</File>
+					<Filter
+						Name="CommomSound"
+						>
+						<File
+							RelativePath=".\CommonSound.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Music.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Sound.cpp"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
-				Name="definitions"
+				Name="Headers"
+				>
+				<File
+					RelativePath=".\AnimationClip.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Fog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Game.h"
+					>
+				</File>
+				<File
+					RelativePath=".\GlobalLight.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Joystick.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Key.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Mathf.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Mouse.h"
+					>
+				</File>
+				<File
+					RelativePath=".\String.h"
+					>
+				</File>
+				<Filter
+					Name="CommomObjects"
+					>
+					<File
+						RelativePath=".\Camera.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CommonObject.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Effect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Image.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Light.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Matrix.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Matrix4.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Mesh.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Object.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Particles.h"
+						>
+					</File>
+					<File
+						RelativePath=".\PixelShader.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprite.h"
+						>
+					</File>
+					<File
+						RelativePath=".\VertexShader.h"
+						>
+					</File>
+					<Filter
+						Name="CommomSound"
+						>
+						<File
+							RelativePath=".\CommonSound.h"
+							>
+						</File>
+						<File
+							RelativePath=".\Music.h"
+							>
+						</File>
+						<File
+							RelativePath=".\Sound.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="Definitions"
 				>
 				<File
 					RelativePath=".\ObjectType.h"
 					>
 				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Project"
+			>
+			<File
+				RelativePath=".\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ReadMe.txt"
+				>
+			</File>
+			<Filter
+				Name="Scenes"
+				>
 			</Filter>
 		</Filter>
 	</Files>

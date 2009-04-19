@@ -11,7 +11,7 @@ public:
 	~Matrix(void);
 	void make(float width,float depth,int xsegmented,int zsegmented);
 
-	void prepareTexture(Image *t,int across=1,int down=1);
+	void prepareImage(Image *t,int across=1,int down=1);
 	void position(float x,float y,float z);
 	void fill(float height,int tileNumber);
 	void randomize(int maxHeight);
