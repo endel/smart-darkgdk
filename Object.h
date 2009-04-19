@@ -3,6 +3,11 @@
 #include "ObjectType.h"
 #include "Mesh.h"
 #include "Image.h"
+#include "AnimationClip.h"
+#include <map>
+using namespace std;
+
+
 class VertexShader;
 class PixelShader;
 class Effect;
@@ -10,12 +15,8 @@ class Effect;
 class Object : 
 	public CommonObject
 {
-private:
-	//control
-	bool	pixelShaderOn,
-			vertexShaderOn;
-public:
-	Object(void);
+	public:
+	//------------------->CONSTRUCTORS / DESTRUCTORS<-------------------
 	Object(int id);
 	Object(char* filename);
 	Object(Mesh *m,Image *t);
@@ -24,97 +25,145 @@ public:
 	Object(Object* second, int limb);
 	Object(float width, float height);
 	Object(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3);
-	~Object(void);
+	~Object();
 
+
+
+
+
+	//---------------------------->VISIBILITY<--------------------------
 	void show();
 	void hide();
 	void toggle();
 
 
-	void play();
-	void play(int start);
-	void play(int start,int end);
 
-	void loop();
-	void loop(int start);
-	void loop(int start, int end);
 
-	void stop();
-	void setFrame(int f);
-	void setFrame(float f);
-	void setFrame(float f,int recalculateBounds);
-	void setFrameSpeed(int s);
+
+	//---------------------------->ANIMACAO<----------------------------
+
+	//-->Adiciona animação
+	void addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_velocidade);
+
+	//-->Play animação
+	void playAnimation(char* p_animation);
+
+	//-->Pause animação
+	void stopAnimation();
+
+	//-->Seta frame
+	void setFrame(int p_frame);
+
+
+
+
+
+
+	//----------------------------->TRANSFORM<---------------------------
+
+	//-->Seta posição objeto
 	void position(float x,float y, float z);
 	void position(Object* o);
-	void setPositionX(float x);
-	void setPositionY(float y);
-	void setPositionZ(float z);
-	void scale(float xSize, float ySize, float zSize);
-	void rotate(float xAngle, float yAngle, float zAngle);
-	void move(float speed);
-	void point(float x, float y, float z);
-	void moveDown(float v);
-	void moveLeft(float v);
-	void moveRight(float v);
-	void moveUp(float v);
-	void rotateX(float angle);
-	void rotateY(float angle);
-	void rotateZ(float angle);
-	void setRotateX(float angle);
-	void setRotateY(float angle);
-	void setRotateZ(float angle);
-	void turnLeft(float v);
-	void turnRight(float v);
-	void pitchUp(float v);
-	void pitchDown(float v);
-	void rollLeft(float v);
-	void rollRight(float v);
-	void setGhost(bool g=true);
-	void setGhost(bool g=true,int mode=0);
-	void setLight(bool l);
-	void setTexture(Image *t);
 
+	//-->Scala objeto
+	void scale(float xSize, float ySize, float zSize);
+
+	//-->Seta rotacao objeto para tantos graus
+	void rotation(float xAngle, float yAngle, float zAngle);
+
+	//-->Rotaciona objeto tantos graus
+	void rotate(float xAngle, float yAngle, float zAngle);
+	
+	//-->Move objeto
+	void localMove(int x, int y, int z);
+
+	//-->Aponta para objeto
+	void lookAt(float x, float y, float z);
+
+
+
+
+
+	//----------------------------->RENDER<---------------------------
+	
+	//-->Objeto fica transparente
+	void setGhost(bool g=true,int mode=0);
+
+	//-->Seta iluminação
+	void setLight(bool l);
+
+	//-->Seta textura
+	void setImage(Image *t);
+
+	//-->Aplica Shaders
 	void applyShader(VertexShader *s);
 	void applyShader(PixelShader *s);
+	
+	//-->Remove Shader
 	void removeShader();
+
+	//-->Aplica / Remove effect
 	void applyEffect(Effect *e);
 	void removeEffect();
 
+	//-->Arruma Pivo
 	void fixPivot();
 
 
-	//getters
-	bool isPlaying();
-	bool isVisible();
-	bool isLooping();
-	float positionX();
-	float positionY();
-	float positionZ();
-	float size();
-	float sizeX();
-	float sizeY();
-	float sizeZ();
-	float angleX();
-	float angleY();
-	float angleZ();
-	float frame();
-	float speed();
-	float interpolation();
-	float totalFrames();
-	float inScreen();
-	float screenX();
-	float screenY();
 
-	bool exists();
+
+
+
+	//----------------------------->GETTERS<---------------------------
+
+	bool  isPlaying();
+	bool  isVisible();
+	bool  isLooping();
+	bool  isExists();
+	float getPositionX();
+	float getPositionY();
+	float getPositionZ();
+	float getSize();
+	float getSizeX();
+	float getSizeY();
+	float getSizeZ();
+	float getAngleX();
+	float getAngleY();
+	float getAngleZ();
+	float getFrame();
+	float getSpeed();
+	float getInterpolation();
+	float getTotalFrames();
+	float getInScreen();
+	float getScreenX();
+	float getScreenY();
+
+	
+
+
+
+	//----------------------------->COLLISION<---------------------------
 
 	bool hit(Object* o);
 	Object* hit();
+
 	bool collision(Object* o);
 	Object* collision();
 
-	float collisionRadius();
-	float collisionCenterX();
-	float collisionCenterY();
-	float collisionCenterZ();
+	float getCollisionRadius();
+	float getCollisionCenterX();
+	float getCollisionCenterY();
+	float getCollisionCenterZ();
 	float intersect(float x, float y, float z, float newX, float newY, float newZ);
+
+
+
+
+
+private:
+	//----------------------------->VARIABLES<--------------------------
+	bool	pixelShaderOn;
+	bool	vertexShaderOn;
+
+	map<char*, AnimationClip*> animations;
 };

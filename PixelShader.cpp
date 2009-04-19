@@ -1,3 +1,4 @@
+#include "DarkGDK.h"
 #include "PixelShader.h"
 #include "Game.h"
 #include "Object.h"
@@ -19,5 +20,5 @@ void PixelShader::apply(Object *o)
 }
 void PixelShader::setImage(int slot,Image *t)
 {
-	dbSetPixelShaderTexture(this->id,slot,t->id);
+	dbSetPixelShaderTexture(this->id, slot, t->id);
 }

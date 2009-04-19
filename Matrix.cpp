@@ -20,7 +20,7 @@ void Matrix::make(float width,float depth,int xsegmented,int zsegmented)
 	dbMakeMatrix(this->id,width,depth,xsegmented,zsegmented);
 }
 
-void Matrix::prepareTexture(Image *t,int across,int down)
+void Matrix::prepareImage(Image *t,int across,int down)
 {
 	dbPrepareMatrixTexture(this->id,t->id,across,down);
 }
