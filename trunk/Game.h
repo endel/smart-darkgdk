@@ -1,0 +1,78 @@
+#pragma once
+#include "DarkGDK.h"
+
+//definitions
+#include "ObjectType.h"
+
+//classes
+#include "CommonObject.h"
+#include "Sprite.h"
+#include "Camera.h"
+#include "Image.h"
+#include "Mesh.h"
+#include "Matrix.h"
+#include "Matrix4.h"
+#include "Object.h"
+#include "Light.h"
+#include "Effect.h"
+#include "PixelShader.h"
+#include "VertexShader.h"
+#include "Music.h"
+#include "Sound.h"
+#include "Particles.h"
+
+//static classes
+#include "Key.h"
+#include "String.h"
+#include "Mouse.h"
+#include "Joystick.h"
+#include "Fog.h"
+
+
+//game
+class Game
+{
+private:
+	static int OBJECT_ID;
+	static int SPRITE_ID;
+	static int IMAGE_ID;
+	static int MESH_ID;
+	static int MATRIX_ID;
+	static int MATRIX4_ID;
+	static int CAMERA_ID;
+	static int LIGHT_ID;
+	static int VERTEXSHADER_ID;
+	static int PIXELSHADER_ID;
+	static int EFFECT_ID;
+	static int MUSIC_ID;
+	static int SOUND_ID;
+	static int PARTICLES_ID;
+public:
+	Game(void);
+	static int getObjectId();
+	static int getSpriteId();
+	static int getImageId();
+	static int getMeshId();
+	static int getMatrixId();
+	static int getMatrix4Id();
+	static int getCameraId();
+	static int getLightId();
+	static int getVertexShaderId();
+	static int getPixelShaderId();
+	static int getEffectId();
+	static int getMusicId();
+	static int getSoundId();
+	static int getParticlesId();
+
+	static int width();
+	static int height();
+
+	//utils
+	static void init(char* title,int w,int h,int syncRate=60);
+	static void setResolution(int w,int h);
+	static bool loop();
+	static void refresh();
+
+	static void setBackdropColor(int r,int g,int b);
+	static void setDir(char* dir);
+};
