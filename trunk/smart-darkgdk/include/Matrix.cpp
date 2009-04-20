@@ -24,6 +24,12 @@ void Matrix::prepareImage(Image *t,int across,int down)
 {
 	dbPrepareMatrixTexture(this->id,t->id,across,down);
 }
+Image* Matrix::prepareImage(char* imagePath,int across,int down)
+{
+	Image* t = new Image(imagePath);
+	this->prepareImage(t,across,down);
+	return t;
+}
 void Matrix::position(float x,float y,float z)
 {
 	dbPositionMatrix(this->id,x,y,z);

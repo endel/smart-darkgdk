@@ -2,6 +2,8 @@
 #include "../Game.h"
 #include "Object.h"
 
+#include "ObjectType.h"
+
 
 
 
@@ -139,6 +141,17 @@ void Camera::setView(float left,float top,float right,float bottom)
 void Camera::setToFollow(float x,float y,float z,float angle,float distance, float height,float smooth, int collision)
 {
 	dbSetCameraToFollow(this->id,x,y,z,angle,distance,height,smooth,collision);
+}
+void Camera::setToFollow(Object* o,ANGLE a,float distance, float height,float smooth, int collision)
+{
+	int angle;
+	switch (a)
+	{
+		case ANGLE_X: angle = o->getAngleX();break;
+		case ANGLE_Y: angle = o->getAngleY();break;
+		case ANGLE_Z: angle = o->getAngleZ();break;
+	}
+	dbSetCameraToFollow(this->id,o->getPositionX(),o->getPositionY(),o->getPositionZ(),angle,distance,height,smooth,collision);
 }
 //--
 
