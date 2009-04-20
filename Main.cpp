@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "smart-darkgdk/Game.h"
 
 void DarkGDK ( void )
 {

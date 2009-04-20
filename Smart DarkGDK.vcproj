@@ -53,7 +53,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				GenerateManifest="true"
+				GenerateManifest="false"
 				IgnoreDefaultLibraryNames="libcmtd, msvcrt, atls"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -148,237 +148,237 @@
 		<Filter
 			Name="Smart DarkGDK"
 			>
-			<Filter
-				Name="Cpp"
+			<File
+				RelativePath=".\smart-darkgdk\Game.cpp"
 				>
-				<File
-					RelativePath=".\AnimationClip.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Fog.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Game.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GlobalLight.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Joystick.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Key.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Mathf.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Mouse.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\String.cpp"
-					>
-				</File>
+			</File>
+			<File
+				RelativePath=".\smart-darkgdk\Game.h"
+				>
+			</File>
+			<Filter
+				Name="darkgdk"
+				>
 				<Filter
-					Name="CommomObjects"
+					Name="headers"
 					>
 					<File
-						RelativePath=".\Camera.cpp"
+						RelativePath=".\smart-darkgdk\include\AnimationClip.h"
 						>
 					</File>
 					<File
-						RelativePath=".\CommonObject.cpp"
+						RelativePath=".\smart-darkgdk\include\Camera.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Effect.cpp"
+						RelativePath=".\smart-darkgdk\include\CommonObject.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Image.cpp"
+						RelativePath=".\smart-darkgdk\include\CommonSound.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Light.cpp"
+						RelativePath=".\smart-darkgdk\include\Effect.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Matrix.cpp"
+						RelativePath=".\smart-darkgdk\include\Image.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Matrix4.cpp"
+						RelativePath=".\smart-darkgdk\include\Light.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Mesh.cpp"
+						RelativePath=".\smart-darkgdk\include\Matrix.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Object.cpp"
+						RelativePath=".\smart-darkgdk\include\Matrix4.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Particles.cpp"
+						RelativePath=".\smart-darkgdk\include\Mesh.h"
 						>
 					</File>
 					<File
-						RelativePath=".\PixelShader.cpp"
+						RelativePath=".\smart-darkgdk\include\Music.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Sprite.cpp"
+						RelativePath=".\smart-darkgdk\include\Object.h"
 						>
 					</File>
 					<File
-						RelativePath=".\VertexShader.cpp"
+						RelativePath=".\smart-darkgdk\include\Particles.h"
 						>
 					</File>
-					<Filter
-						Name="CommomSound"
+					<File
+						RelativePath=".\smart-darkgdk\include\PixelShader.h"
 						>
-						<File
-							RelativePath=".\CommonSound.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Music.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Sound.cpp"
-							>
-						</File>
-					</Filter>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Sound.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Sprite.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\VertexShader.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="cpp"
+					>
+					<File
+						RelativePath=".\smart-darkgdk\include\AnimationClip.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Camera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\CommonObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\CommonSound.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Effect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Image.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Light.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Matrix.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Matrix4.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Mesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Music.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Object.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Particles.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\PixelShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Sound.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Sprite.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\VertexShader.cpp"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
-				Name="Headers"
+				Name="definitions"
 				>
 				<File
-					RelativePath=".\AnimationClip.h"
+					RelativePath=".\smart-darkgdk\include\ObjectType.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Fog.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Game.h"
-					>
-				</File>
-				<File
-					RelativePath=".\GlobalLight.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Joystick.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Key.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Mathf.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Mouse.h"
-					>
-				</File>
-				<File
-					RelativePath=".\String.h"
-					>
-				</File>
-				<Filter
-					Name="CommomObjects"
-					>
-					<File
-						RelativePath=".\Camera.h"
-						>
-					</File>
-					<File
-						RelativePath=".\CommonObject.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Effect.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Image.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Light.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Matrix.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Matrix4.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Mesh.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Object.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Particles.h"
-						>
-					</File>
-					<File
-						RelativePath=".\PixelShader.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Sprite.h"
-						>
-					</File>
-					<File
-						RelativePath=".\VertexShader.h"
-						>
-					</File>
-					<Filter
-						Name="CommomSound"
-						>
-						<File
-							RelativePath=".\CommonSound.h"
-							>
-						</File>
-						<File
-							RelativePath=".\Music.h"
-							>
-						</File>
-						<File
-							RelativePath=".\Sound.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
 			</Filter>
 			<Filter
-				Name="Definitions"
+				Name="static"
 				>
-				<File
-					RelativePath=".\ObjectType.h"
+				<Filter
+					Name="cpp"
 					>
-				</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Fog.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\GlobalLight.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Joystick.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Key.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Mathf.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Mouse.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\String.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="headers"
+					>
+					<File
+						RelativePath=".\smart-darkgdk\include\Fog.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\GlobalLight.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Joystick.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Key.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Mathf.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Mouse.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\String.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
