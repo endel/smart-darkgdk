@@ -1,5 +1,5 @@
 #include "Sound.h"
-#include "Game.h"
+#include "../Game.h"
 
 Sound::Sound(void)
 {

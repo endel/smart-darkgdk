@@ -1,5 +1,5 @@
 #include "Commonobject.h"
-#include "Game.h"
+#include "../Game.h"
 #include "Sprite.h"
 #include "DarkGDK.h"
 
