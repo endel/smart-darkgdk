@@ -7,10 +7,3 @@
   # Adicionar as funções de "3D  Maths" para a classe de matemática
   # Criar as funções de "World Commands"
   # Criar as funções de "Display"
-
-==Lista de bugs conhecidos:==
-  # Descobrir porquê o modelo da menina não rotaciona direito (problema no 
-modelo? na ferramenta?)
-
-==Sobre a DarkGDK==
-  # Diferenças entre Bitmap e Image??
