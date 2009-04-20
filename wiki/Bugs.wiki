@@ -1,0 +1,3 @@
+==Lista de bugs conhecidos:==
+  # Descobrir porquê o modelo da menina não rotaciona direito (problema no 
+modelo? na ferramenta?)
