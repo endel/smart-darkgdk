@@ -1,5 +1,5 @@
 #include "VertexShader.h"
-#include "Game.h"
+#include "../Game.h"
 #include "Object.h"
 
 VertexShader::VertexShader(char* filename)
