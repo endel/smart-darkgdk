@@ -323,6 +323,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\smart-darkgdk\include\FTP.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\smart-darkgdk\include\GlobalLight.cpp"
 						>
 					</File>
@@ -352,6 +356,10 @@
 					>
 					<File
 						RelativePath=".\smart-darkgdk\include\Fog.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\FTP.h"
 						>
 					</File>
 					<File

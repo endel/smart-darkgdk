@@ -70,12 +70,18 @@ class Object :
 
 	//-->Seta rotacao objeto para tantos graus
 	void rotation(float xAngle, float yAngle, float zAngle);
+	void rotationX(float angle);
+	void rotationY(float angle);
+	void rotationZ(float angle);
 
 	//-->Rotaciona objeto tantos graus
 	void rotate(float xAngle, float yAngle, float zAngle);
+	void rotateX(float angle);
+	void rotateY(float angle);
+	void rotateZ(float angle);
 	
 	//-->Move objeto
-	void localMove(int x, int y, int z);
+	void localMove(float x, float y, float z);
 
 	//-->Aponta para objeto
 	void lookAt(float x, float y, float z);
@@ -94,6 +100,7 @@ class Object :
 
 	//-->Seta textura
 	void setImage(Image *t);
+	Image *setImage(char* imagePath);
 
 	//-->Aplica Shaders
 	void applyShader(VertexShader *s);

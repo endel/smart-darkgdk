@@ -17,3 +17,10 @@ enum ParticleType
 	SNOW,
 	FIRE
 };
+
+enum ANGLE 
+{
+	ANGLE_X,
+	ANGLE_Y,
+	ANGLE_Z
+};

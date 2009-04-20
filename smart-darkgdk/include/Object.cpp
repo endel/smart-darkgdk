@@ -163,21 +163,41 @@ void Object::scale(float xSize, float ySize, float zSize)
 
 void Object::rotation(float xAngle, float yAngle, float zAngle)
 {
-	dbXRotateObject(this->id, xAngle);
-	dbYRotateObject(this->id, yAngle);
-	dbZRotateObject(this->id, zAngle);
+	dbRotateObject(this->id,xAngle,yAngle,zAngle);
+}
+void Object::rotationX(float angle)
+{
+	dbXRotateObject(this->id, angle);
+}
+void Object::rotationY(float angle)
+{
+	dbYRotateObject(this->id, angle);
+}
+void Object::rotationZ(float angle)
+{
+	dbZRotateObject(this->id, angle);
 }
 //--
 
 void Object::rotate(float xAngle, float yAngle, float zAngle)
 {
-	dbXRotateObject(this->id, this->getAngleX() + xAngle);
-	dbYRotateObject(this->id, this->getAngleY() + yAngle);
-	dbZRotateObject(this->id, this->getAngleZ() + zAngle);
+	dbRotateObject(this->id, this->getAngleX() + xAngle, this->getAngleY() + yAngle, this->getAngleZ() + zAngle);
+}
+void Object::rotateX(float angle)
+{
+	dbXRotateObject(this->id, this->getAngleX() + angle);
+}
+void Object::rotateY(float angle)
+{
+	dbYRotateObject(this->id, this->getAngleY() + angle);
+}
+void Object::rotateZ(float angle)
+{
+	dbZRotateObject(this->id, this->getAngleZ() + angle);
 }
 //--
 
-void Object::localMove(int x, int y, int z)
+void Object::localMove(float x, float y, float z)
 {
 	dbMoveObjectRight(this->id, x);
 	dbMoveObjectUp(this->id, y);
@@ -216,6 +236,12 @@ void Object::setLight(bool l)
 void Object::setImage(Image *t)
 {
 	dbTextureObject(this->id,t->id);
+}
+Image *Object::setImage(char* imagePath)
+{
+	Image* t = new Image(imagePath);
+	this->setImage(t);
+	return t;
 }
 //--
 

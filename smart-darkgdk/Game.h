@@ -28,6 +28,7 @@
 #include "include/Mouse.h"
 #include "include/Joystick.h"
 #include "include/Fog.h"
+#include "include/FTP.h"
 #include "include/Mathf.h"
 
 

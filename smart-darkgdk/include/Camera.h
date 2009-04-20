@@ -1,6 +1,7 @@
 #pragma once
 #include "Commonobject.h"
 #include "Image.h"
+#include "ObjectType.h"
 
 class Texture;
 class Object;
@@ -66,11 +67,9 @@ public:
 
 	void setView(float left,float top,float right,float bottom);
 	void setToFollow(float x,float y,float z,float angle,float distance, float height,float smooth, int collision);
+	void setToFollow(Object* o,ANGLE a,float distance, float height,float smooth, int collision);
 	void setToImage(Image *t,int width,int height);
 	void setToImage(Image *t,int width,int height,int genAlpha);
-	
-
-
 
 
 
