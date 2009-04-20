@@ -28,7 +28,7 @@ void DarkGDK ( void )
 	playerAnimado->fixPivot();
 	
 	playerAnimado->addAnimation("caminha", 570, 605, 50);
-	playerAnimado->addAnimation("idle", 430, 540, 50);
+	playerAnimado->addAnimation("idle", 430, 542, 50);
 	
 
 	Camera* camera = new Camera();
