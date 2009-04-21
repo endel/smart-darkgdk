@@ -1,6 +1,6 @@
 #labels Phase-Requirements,Phase-Implementation
 ==Lista de features necessárias:==
-  # Classe 2D (Sprite)
+  # OK -Classe 2D (Sprite)
   # Leitura e escrita de arquivos (File)
   # Controle de cenas (Scene)
   # Suporte à terrenos (Terrain)
