@@ -17,8 +17,4 @@
   # Fade camera 3a pessoa (Camera)
   # Mudança de cameras (Camera)
   # Sistem Particulas
-
-
-
-==Sobre a DarkGDK==
-  # 
+  # Entender classe Bitmap GDK
