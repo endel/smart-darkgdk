@@ -1,2 +1,0 @@
-==Sobre a DarkGDK==
-  # Diferenças entre Bitmap e Image??
