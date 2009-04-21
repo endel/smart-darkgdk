@@ -30,6 +30,7 @@
 #include "include/Fog.h"
 #include "include/FTP.h"
 #include "include/Mathf.h"
+#include "include/Transition.h"
 
 
 //game

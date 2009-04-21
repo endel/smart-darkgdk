@@ -24,3 +24,18 @@ enum ANGLE
 	ANGLE_Y,
 	ANGLE_Z
 };
+
+//-->AnimationState = Controla estado de animação que o Object esta no momento
+enum AnimationState
+{
+	STOPPED, //->Parado em determinado frame
+	RUNNING, //->Alguma animação rolando
+	CHANGING //->Fade entre duas animações
+};
+
+//-->WrapMode = Modos de animação dos AnimationClip
+enum WrapMode
+{
+	ONCE, //->Toca a animação uma vez e para no ultimo frame
+	LOOP  //->Fica em loop na animação
+};

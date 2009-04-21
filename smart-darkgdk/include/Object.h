@@ -43,10 +43,13 @@ class Object :
 	//---------------------------->ANIMACAO<----------------------------
 
 	//-->Adiciona animação
-	void addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_velocidade);
+	void addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_velocidade, WrapMode p_wrapMode);
 
 	//-->Play animação
 	void playAnimation(char* p_animation);
+
+	//-->Troca animação com fade
+	void crossFadeAnimation(char* p_animation, float p_switchVelocity);
 
 	//-->Pause animação
 	void stopAnimation();
@@ -54,8 +57,8 @@ class Object :
 	//-->Seta frame
 	void setFrame(int p_frame);
 
-
-
+	//-->Atualiza animações personagem
+	void updateAnimation();
 
 
 
@@ -172,5 +175,14 @@ private:
 	bool	pixelShaderOn;
 	bool	vertexShaderOn;
 
+	//-->Animation
+	float animFrame;
+	float animVelocity;
+	float animInterpPercent;
+	float animSwitchVelocity;
+	
+	AnimationClip* currentAnimation;
+	AnimationState animationState;
+	
 	map<char*, AnimationClip*> animations;
 };
