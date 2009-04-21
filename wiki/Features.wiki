@@ -7,3 +7,6 @@
   # Adicionar as funções de "3D  Maths" para a classe de matemática
   # Criar as funções de "World Commands"
   # Criar as funções de "Display"
+
+==Sobre a DarkGDK==
+  # Diferenças entre Bitmap e Image??
