@@ -9,7 +9,7 @@
   # Criar as funções de "Display"
   # Classe Vertex / Pixel Shader (Vertex / Pixel Shader)
   # Iluminacao Classes
-  # Polinimios Transition (Mathf)
+  # OK - Polinimios Transition (Transition)
   # Classe Tween (Tween)
   # OK - Interpolacao animações (Object)
   # Importar 3D (Lightmaps, texturas com alpha)
