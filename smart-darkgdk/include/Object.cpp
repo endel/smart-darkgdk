@@ -409,6 +409,12 @@ void Object::fixPivot()
 {
 	dbFixObjectPivot(this->id);
 }
+//--
+
+void Object::offsetTexture(float p_x, float p_y)
+{
+	dbScrollObjectTexture(this->id, p_x, p_y);
+}
 
 
 
