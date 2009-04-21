@@ -25,11 +25,16 @@ void DarkGDK ( void )
 	playerAnimado->rotate(0, 180, 0);
 	playerAnimado->fixPivot();
 	
-	playerAnimado->addAnimation("caminha", 570, 605, 50);
-	playerAnimado->addAnimation("idle", 430, 542, 50);
+	playerAnimado->addAnimation("caminha", 570, 605, 6, WrapMode::LOOP);
+	playerAnimado->addAnimation("idle", 430, 542, 6, WrapMode::LOOP);
+	playerAnimado->addAnimation("zombie", 659, 686, 6, WrapMode::LOOP);
+
+	playerAnimado->playAnimation("idle");
 	
 	Camera* camera = new Camera();
 	
+	float ratioT = 0.0f;
+
 	//-->-----------------------------------------
 	//-->			 LOOP PRINCIPAL
 	//-->-----------------------------------------
@@ -39,31 +44,37 @@ void DarkGDK ( void )
 			
 		playerAnimado->localMove((dbRightKey() - dbLeftKey()) * 3, 0, (dbUpKey() - dbDownKey()) * 3);
 
-		if(dbRightKey() || dbLeftKey() || dbUpKey() || dbDownKey())
+		if((dbRightKey() - dbLeftKey()) || (dbUpKey() - dbDownKey()))
 		{
-			playerAnimado->playAnimation("caminha");
+			//playerAnimado->crossFadeAnimation("caminha", 6.0f);
 		}
 		else
 		{
-			playerAnimado->playAnimation("idle");
+			//playerAnimado->crossFadeAnimation("idle", 6.0f);
 		}
 
 		if(dbRightKey())
 		{
 			//playerAnimado->rotate(0, 3, 0);
-			playerAnimado->rotateY(2);
+			//playerAnimado->rotateY(2);
+			ratioT += 0.005;
+			playerAnimado->position(Mathf::Lerp(0.0f, 300.0f, ratioT, Transition::OutElasticBig), playerAnimado->getPositionY(), playerAnimado->getPositionZ());
 		}
-		
+
 		if(dbLeftKey())
 		{
-			//playerAnimado->rotate(0, -3, 0);
+			playerAnimado->rotate(0, -3, 0);
 			playerAnimado->rotateY(-2);
 		}
 	
-		camera->setToFollow(playerAnimado,ANGLE_Y,150,80,20,1);
-		//camera->follow3DPerson(playerAnimado, 500, 370, 120); 
+		//camera->setToFollow(playerAnimado,ANGLE_Y,250,180,20,1);
+		camera->follow3DPerson(playerAnimado, 500, 370, 120); 
 			
 		Mouse::setPosition(Game::width()/2,Game::height()/2);
+
+		playerAnimado->updateAnimation();
+
+		
 
 		//-->Atualiza Game
 		Game::refresh();

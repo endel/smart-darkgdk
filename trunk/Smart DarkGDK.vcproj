@@ -350,6 +350,10 @@
 						RelativePath=".\smart-darkgdk\include\String.cpp"
 						>
 					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Transition.cpp"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="headers"
@@ -384,6 +388,10 @@
 					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\String.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Transition.h"
 						>
 					</File>
 				</Filter>

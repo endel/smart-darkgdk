@@ -15,6 +15,8 @@
 Object::Object(int id)
 {
 	this->setId(id);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -22,6 +24,8 @@ Object::Object(char* filename)
 {
 	this->setId(Game::getObjectId());
 	dbLoadObject(filename,this->id);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -29,6 +33,8 @@ Object::Object(Mesh *m,Image *t)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObject(this->id,m->id,t->id);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -36,6 +42,8 @@ Object::Object(float width,float height,float depth)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectBox(this->id,width,height,depth);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -49,6 +57,8 @@ Object::Object(ObjectType t, float size)
 		case CYLINDER: dbMakeObjectCylinder(this->id,size);break;
 		case SPHERE: dbMakeObjectSphere(this->id,size);break;
 	}
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -56,6 +66,8 @@ Object::Object(Object* second, int limb)
 {
 	this->setId(Game::getObjectId());
 	//dbMakeObjectFromLimb(
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -63,6 +75,8 @@ Object::Object(float width, float height)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectPlain(this->id,width,height);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -70,6 +84,8 @@ Object::Object(float x1, float y1, float z1, float x2, float y2, float z2, float
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectTriangle(this->id,x1,y1,z1, x2,y2,z2, x3,y3,z3);
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -100,7 +116,9 @@ void Object::toggle()
 	if (isVisible()) hide();
 	else show();
 }
-//--
+
+
+
 
 
 
@@ -108,25 +126,52 @@ void Object::toggle()
 //------------------------------------------------
 //					ANIMATION
 //------------------------------------------------
+
+void 
+Object::addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_velocidade, WrapMode p_wrapMode)
+{	
+	this->animations[p_name] = new AnimationClip(p_name, p_frameInicial, p_frameFinal, p_velocidade, p_wrapMode);
+}
+//--
+
 void
 Object::playAnimation(char* p_animation)
 {
-	dbSetObjectSpeed(this->id, this->animations[p_animation]->velocidade);
-	dbLoopObject(this->id, this->animations[p_animation]->frameInicial, animations[p_animation]->frameFinal);
+	if(p_animation != this->currentAnimation->name)
+	{
+		AnimationClip* newAnimation = new AnimationClip(animations[p_animation]);
+
+		this->currentAnimation = newAnimation;
+		this->animFrame = newAnimation->frameInicial;
+		this->animVelocity = newAnimation->velocidade;
+
+		this->animationState = AnimationState::RUNNING;
+	}
 }
 //--
 
 void 
-Object::addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_velocidade)
-{	
-	this->animations[p_name] = new AnimationClip(p_name, p_frameInicial, p_frameFinal, p_velocidade);
+Object::crossFadeAnimation(char* p_animation, float p_switchVelocity)
+{
+	if(p_animation != this->currentAnimation->name)
+	{
+		AnimationClip* newAnimation = new AnimationClip(animations[p_animation]);
+
+		this->currentAnimation = newAnimation;
+		this->animFrame = newAnimation->frameInicial;
+		this->animInterpPercent = 0.0f;
+		this->animSwitchVelocity = p_switchVelocity;
+
+		this->animationState = AnimationState::CHANGING;
+	}
 }
 //--
 
 void 
 Object::stopAnimation()
 {
-	dbStopObject(this->id);
+	this->animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 //--
 
@@ -136,6 +181,88 @@ Object::setFrame(int p_frame)
 	dbSetObjectFrame(this->id, p_frame);
 }
 //--
+
+void 
+Object::updateAnimation()
+{
+	switch(this->animationState)
+	{
+		//-->STOPPED
+		case AnimationState::STOPPED:
+		{
+			dbSetObjectFrame(this->id, (int)this->animFrame);
+			break;
+		}
+
+		//-->CHANGING
+		case AnimationState::CHANGING:
+		{
+			this->animInterpPercent += this->animSwitchVelocity;
+			
+			if(this->animInterpPercent >= 100.0f)
+			{
+				this->animInterpPercent = 100.0f;
+				dbSetObjectInterpolation(this->id, (int)this->animInterpPercent);
+				this->animationState = AnimationState::RUNNING;
+			}
+			else
+			{
+				dbSetObjectInterpolation(this->id, (int)this->animInterpPercent);
+			}
+
+			dbSetObjectFrame(this->id, (int)this->animFrame);
+			break;
+		}
+
+		//-->RUNNING
+		case AnimationState::RUNNING:
+		{
+			this->animFrame += this->animVelocity * 0.1f;
+
+			if(this->currentAnimation->wrapMode == WrapMode::LOOP)
+			{
+				if(this->animVelocity >= 0)
+				{
+					if(this->animFrame > this->currentAnimation->frameFinal)
+					{
+						this->animFrame = this->currentAnimation->frameInicial;
+					}
+				}
+				else
+				{
+					if(this->animFrame < this->currentAnimation->frameInicial)
+					{
+						this->animFrame = this->currentAnimation->frameFinal;
+					}
+				}
+			}
+			else if(currentAnimation->wrapMode == WrapMode::ONCE)
+			{
+				if(this->animVelocity >= 0)
+				{
+					if(this->animFrame > this->currentAnimation->frameFinal)
+					{
+						this->animFrame = this->currentAnimation->frameFinal;
+						this->animationState = AnimationState::STOPPED;
+					}
+				}
+				else
+				{
+					if(this->animFrame < this->currentAnimation->frameInicial)
+					{
+						this->animFrame = this->currentAnimation->frameInicial;
+						this->animationState = AnimationState::STOPPED;
+					}
+				}
+			}
+
+			dbSetObjectFrame(this->id, (int)this->animFrame);
+			break;
+		}
+	}
+}
+
+
 
 
 
