@@ -119,6 +119,8 @@ class Object :
 	//-->Arruma Pivo
 	void fixPivot();
 
+	//-->Move textura
+	void offsetTexture(float p_x, float p_y);
 
 
 

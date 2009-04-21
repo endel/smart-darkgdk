@@ -32,6 +32,10 @@ void DarkGDK ( void )
 	playerAnimado->playAnimation("idle");
 	
 	Camera* camera = new Camera();
+
+	Image* imageTeste = new Image("Testes/SpriteTeste.PNG");
+	Image* imageTeste2 = new Image("Testes/grass_T.BMP");
+	Sprite* spriteTeste = new Sprite(0, 0, imageTeste);
 	
 	float ratioT = 0.0f;
 
@@ -42,23 +46,23 @@ void DarkGDK ( void )
 	while(Game::loop())
 	{
 			
+
+
 		playerAnimado->localMove((dbRightKey() - dbLeftKey()) * 3, 0, (dbUpKey() - dbDownKey()) * 3);
 
 		if((dbRightKey() - dbLeftKey()) || (dbUpKey() - dbDownKey()))
 		{
-			//playerAnimado->crossFadeAnimation("caminha", 6.0f);
+			playerAnimado->crossFadeAnimation("caminha", 6.0f);
 		}
 		else
 		{
-			//playerAnimado->crossFadeAnimation("idle", 6.0f);
+			playerAnimado->crossFadeAnimation("idle", 6.0f);
 		}
 
 		if(dbRightKey())
 		{
-			//playerAnimado->rotate(0, 3, 0);
-			//playerAnimado->rotateY(2);
-			ratioT += 0.005;
-			playerAnimado->position(Mathf::Lerp(0.0f, 300.0f, ratioT, Transition::OutElasticBig), playerAnimado->getPositionY(), playerAnimado->getPositionZ());
+			playerAnimado->rotate(0, 3, 0);
+			playerAnimado->rotateY(2);
 		}
 
 		if(dbLeftKey())
@@ -66,7 +70,10 @@ void DarkGDK ( void )
 			playerAnimado->rotate(0, -3, 0);
 			playerAnimado->rotateY(-2);
 		}
-	
+		
+		spriteTeste->position(Mathf::Lerp(0, 60, ratioT, Transition::OutElasticBig), 0);	
+
+
 		//camera->setToFollow(playerAnimado,ANGLE_Y,250,180,20,1);
 		camera->follow3DPerson(playerAnimado, 500, 370, 120); 
 			
