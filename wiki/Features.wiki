@@ -11,7 +11,7 @@
   # Iluminacao Classes
   # Polinimios Transition (Mathf)
   # Classe Tween (Tween)
-  # Interpolacao animações (Object)
+  # OK - Interpolacao animações (Object)
   # Importar 3D (Lightmaps, texturas com alpha)
   # Classe Debug
   # Fade camera 3a pessoa (Camera)
