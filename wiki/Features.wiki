@@ -7,6 +7,18 @@
   # Adicionar as funções de "3D  Maths" para a classe de matemática
   # Criar as funções de "World Commands"
   # Criar as funções de "Display"
+  # Classe Vertex / Pixel Shader (Vertex / Pixel Shader)
+  # Iluminacao Classes
+  # Polinimios Transition (Mathf)
+  # Classe Tween (Tween)
+  # Interpolacao animações (Object)
+  # Importar 3D (Lightmaps, texturas com alpha)
+  # Classe Debug
+  # Fade camera 3a pessoa (Camera)
+  # Mudança de cameras (Camera)
+  # Sistem Particulas
+
+
 
 ==Sobre a DarkGDK==
-  # Diferenças entre Bitmap e Image??
+  # 
