@@ -20,3 +20,4 @@
   # Entender classe Bitmap GDK
   # Colisão Entender
   # Animações se autoUpdatearem, nao precisar chamar funcao
+  # Classe Font
