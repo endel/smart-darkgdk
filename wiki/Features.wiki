@@ -18,3 +18,5 @@
   # Mudança de cameras (Camera)
   # Sistem Particulas
   # Entender classe Bitmap GDK
+  # Colisão Entender
+  # Animações se autoUpdatearem, nao precisar chamar funcao
