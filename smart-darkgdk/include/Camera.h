@@ -56,12 +56,17 @@ public:
 	//-->Rotaciona tantos graus
 	void rotate(float angleX,float angleY,float angleZ);
 
+	//-->Rotaciona tantos graus
+	void rotation(float angleX,float angleY,float angleZ);
+
 	//-->Follow Object 3D Person
 	void follow3DPerson(Object* objeto, float distance, float height, float alturaVisao);
 
 	//-->Seta a orientacao igual ao objeto
 	void setToObjectOrientation(Object *o);
 
+	//-->DELETAR
+	void follow3DPersonTrabalho(Object* objeto, float distance, float height, float alturaVisao, float deltaMouse);
 
 
 

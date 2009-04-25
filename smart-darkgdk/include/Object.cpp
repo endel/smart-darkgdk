@@ -415,7 +415,12 @@ void Object::offsetTexture(float p_x, float p_y)
 {
 	dbScrollObjectTexture(this->id, p_x, p_y);
 }
+//--
+void Object::showBoundingBox()
+{
+	dbShowObjectBounds(this->id);
 
+}
 
 
 
@@ -561,6 +566,26 @@ float Object::getScreenY()
 //------------------------------------------------
 //					COLLISION
 //------------------------------------------------
+
+void Object::makeBoxCollider(float p_x1, float p_y1, float p_z1, float p_x2, float p_y2, float p_z2)
+{
+	dbMakeObjectCollisionBox(this->id, p_x1, p_y1, p_z1, p_x2, p_y2, p_z2, 1);
+}
+//--
+
+void Object::makeBoxCollider()
+{
+	dbSetObjectCollisionToBoxes(this->id);
+}
+//--
+
+void Object::collisionEnabled(bool flag)
+{
+	if(flag)	dbSetObjectCollisionOn(this->id);
+	else		dbSetObjectCollisionOff(this->id);
+}
+//--
+
 bool Object::hit(Object* o)
 {
 	return dbObjectHit(this->id,o->id);
