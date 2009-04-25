@@ -66,6 +66,9 @@ class Object :
 
 	//-->Seta posição objeto
 	void position(float x,float y, float z);
+	void positionX(float val);
+	void positionY(float val);
+	void positionZ(float val);
 	void position(Object* o);
 
 	//-->Scala objeto
@@ -85,6 +88,9 @@ class Object :
 	
 	//-->Move objeto
 	void localMove(float x, float y, float z);
+	void move(float v);
+	void moveY(float v);
+	void moveX(float v);
 
 	//-->Aponta para objeto
 	void lookAt(float x, float y, float z);

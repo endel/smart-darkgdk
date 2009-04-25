@@ -20,6 +20,16 @@ Particles::Particles(ParticleType p, Image *t, int frequency, float x, float y, 
 		case FIRE: dbMakeFireParticles(this->id,t->id,frequency,x,y,z,width,height,depth);break;
 	}
 }
+Particles::Particles(ParticleType p, char* filename, int frequency, float x, float y, float z, float width, float height, float depth)
+{
+	Image *t = new Image(filename);
+	this->setId(Game::getParticlesId());
+	switch (p)
+	{
+		case SNOW: dbMakeSnowParticles(this->id,t->id,frequency,x,y,z,width,height,depth);break;
+		case FIRE: dbMakeFireParticles(this->id,t->id,frequency,x,y,z,width,height,depth);break;
+	}
+}
 
 Particles::~Particles(void)
 {

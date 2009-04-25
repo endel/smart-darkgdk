@@ -4,6 +4,23 @@
 #include "Sprite.h"
 #include "DarkGDK.h"
 
+Sprite::Sprite(Image* p_image)
+{
+	this->setId(Game::getSpriteId());
+	dbSprite(this->id, 0, 0, p_image->id);
+	resetTextureOffset();
+}
+//--
+Sprite::Sprite(char* filename)
+{
+	this->setId(Game::getSpriteId());
+	
+	Image* img = new Image(filename);
+	dbSprite(this->id, 0, 0, img->id);
+
+	resetTextureOffset();
+}
+//--
 Sprite::Sprite(int p_x, int p_y, Image* p_image)
 {
 	this->setId(Game::getSpriteId());
@@ -11,8 +28,7 @@ Sprite::Sprite(int p_x, int p_y, Image* p_image)
 	dbSprite(this->id, 0, 0, p_image->id);
 	dbOffsetSprite(this->id, p_x, p_y);
 
-	this->offsetTextureU = 0;
-	this->offsetTextureV = 0;
+	resetTextureOffset();
 }
 //--
 Sprite::Sprite(int p_x, int p_y, Image* p_image, int p_framesAcross, int p_framesDown, char* name)
@@ -22,8 +38,7 @@ Sprite::Sprite(int p_x, int p_y, Image* p_image, int p_framesAcross, int p_frame
 	dbCreateAnimatedSprite(this->id, name, p_framesAcross, p_framesDown, p_image->id);
 	dbSprite(this->id, p_x, p_y, p_image->id);
 
-	this->offsetTextureU = 0;
-	this->offsetTextureV = 0;
+	resetTextureOffset();
 }
 //--
 Sprite::~Sprite(void)
@@ -31,7 +46,11 @@ Sprite::~Sprite(void)
 	dbDeleteSprite(this->id);
 }
 
-
+void Sprite::resetTextureOffset()
+{
+	this->offsetTextureU = 0;
+	this->offsetTextureV = 0;
+}
 
 //------------------------------------------------
 //					TRANSFORM
@@ -162,7 +181,7 @@ Sprite::getPositionY()
 //--
 
 int
-Sprite::getWidht()
+Sprite::getWidth()
 {
 	return dbSpriteWidth(this->id);
 }

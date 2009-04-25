@@ -308,6 +308,10 @@
 				Name="definitions"
 				>
 				<File
+					RelativePath=".\smart-darkgdk\include\Core.h"
+					>
+				</File>
+				<File
 					RelativePath=".\smart-darkgdk\include\ObjectType.h"
 					>
 				</File>

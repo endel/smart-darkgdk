@@ -7,9 +7,12 @@ class Sprite :
 {
 public:
 	//-->CONSTRUCTORS / DESTRUCTORS
+	Sprite(char* filename);
+	Sprite(Image* p_image);
 	Sprite(int p_x, int p_y, Image* p_image);
 	Sprite(int p_x, int p_y, Image* p_image, int p_framesAcross, int p_framesDown, char* name);
 	~Sprite();
+	void resetTextureOffset();
 
 	
 	//-->TRANFORM
@@ -36,7 +39,7 @@ public:
 	//-->GETTERS
 	int getPositionX();
 	int getPositionY();
-	int getWidht();
+	int getWidth();
 	int getHeight();
 	float getAngle();
 	int getIsVisible();

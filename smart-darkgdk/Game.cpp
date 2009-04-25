@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "DarkGDK.h"
+#include "include/Core.h"
 
 int Game::OBJECT_ID = 0;
 int Game::SPRITE_ID = 0;
@@ -16,6 +17,10 @@ int Game::SOUND_ID = 0;
 int Game::PARTICLES_ID = 0;
 
 int Game::CAMERA_ID = -1;
+
+MouseClick Game::LAST_MOUSE_CLICK = NO_CLICK;
+MouseClick Game::MOUSE_CLICK = NO_CLICK;
+MouseClickState Game::MOUSE_STATE = MOUSE_STANDBY;
 
 void Game::init(char* title,int w,int h,int syncRate) 
 {
@@ -93,10 +98,29 @@ int Game::height()
 }
 bool Game::loop()
 {
+	if (MOUSE_STATE == MOUSE_PRESSING) 
+	{
+		LAST_MOUSE_CLICK = NO_CLICK;
+	}
+	if (MOUSE_CLICK == NO_CLICK && MOUSE_STATE != MOUSE_STANDBY) 
+	{
+		MOUSE_STATE = MOUSE_STANDBY;
+	}
 	return LoopGDK();
 }
 void Game::refresh()
 {
+	MOUSE_CLICK = (MouseClick) dbMouseClick();
+	
+
+	if (MOUSE_CLICK != LAST_MOUSE_CLICK && MOUSE_STATE != MOUSE_PRESSING) 
+	{
+		MOUSE_STATE = MOUSE_PRESS;
+		LAST_MOUSE_CLICK = MOUSE_CLICK;
+	} else
+	{
+		MOUSE_STATE = MOUSE_PRESSING;
+	}
 	dbSync();
 }
 void Game::setDir(char* dir)
@@ -106,4 +130,8 @@ void Game::setDir(char* dir)
 void Game::setBackdropColor(int r,int g,int b)
 {
 	dbBackdropColor(dbRGB(r,g,b));
+}
+MouseClick Game::getLastMouseClick()
+{
+	return LAST_MOUSE_CLICK;
 }

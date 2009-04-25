@@ -274,6 +274,20 @@ void Object::position(float x,float y, float z)
 {
 	dbPositionObject(this->id, x, y, z);
 }
+void Object::positionX(float val)
+{
+	this->position(val,this->getPositionY(),this->getPositionZ());
+}
+//--
+void Object::positionY(float val)
+{
+	this->position(this->getPositionX(),val,this->getPositionZ());
+}
+//--
+void Object::positionZ(float val)
+{
+	this->position(this->getPositionX(),this->getPositionY(),val);
+}
 //--
 
 void Object::position(Object* o)
@@ -329,6 +343,24 @@ void Object::localMove(float x, float y, float z)
 	dbMoveObjectRight(this->id, x);
 	dbMoveObjectUp(this->id, y);
 	dbMoveObject(this->id, z);
+}
+//--
+
+void Object::moveY(float v)
+{
+	dbMoveObjectUp(this->id, v);
+}
+//--
+
+void Object::moveX(float v)
+{
+	dbMoveObjectRight(this->id, v);
+}
+//--
+
+void Object::move(float v)
+{
+	dbMoveObject(this->id,v);
 }
 //--
 
