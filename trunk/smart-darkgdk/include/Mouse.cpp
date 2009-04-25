@@ -1,5 +1,5 @@
 #include "Mouse.h"
-#include "DarkGDK.h"
+#include "../Game.h"
 
 bool Mouse::visible = true;
 
@@ -61,7 +61,11 @@ int Mouse::positionZ()
 {
 	return dbMouseZ();
 }
-int Mouse::click()
+int Mouse::press(MouseClick c)
 {
-	return dbMouseClick();
+	return Game::LAST_MOUSE_CLICK == c;
+}
+int Mouse::click(MouseClick c)
+{
+	return Game::MOUSE_CLICK == c;
 }

@@ -2,6 +2,8 @@
 #include "CommonObject.h"
 #include "Image.h"
 
+class Object;
+
 class Matrix 
 	: public CommonObject
 {
@@ -9,7 +11,7 @@ public:
 	Matrix(void);
 	Matrix(float width,float depth,int xsegmented,int zsegmented);
 	~Matrix(void);
-	void make(float width,float depth,int xsegmented,int zsegmented);
+	void make(float w,float d,int xsegmented,int zsegmented);
 
 	void prepareImage(Image *t,int across=1,int down=1);
 	Image* prepareImage(char* imagePath,int across=1,int down=1);
@@ -41,7 +43,14 @@ public:
 	bool tilesExist();
 	int wireframeState();
 	float groundHeight(float x, float z);
+	float groundHeight(Object *o);
 	float matrixHeight(int tileX,int tileZ);
+	
+	float getWidth();
+	float getDepth();
+
+private:
+	float width, depth;
 
 
 //SET VECTOR3 TO MATRIX POSITION : SET VECTOR3 TO MATRIX POSITION Vector, Matrix Numbers

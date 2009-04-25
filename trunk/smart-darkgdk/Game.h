@@ -3,6 +3,7 @@
 
 //definitions
 #include "include/ObjectType.h"
+#include "include/Core.h"
 
 //classes
 #include "include/CommonObject.h"
@@ -51,7 +52,14 @@ private:
 	static int MUSIC_ID;
 	static int SOUND_ID;
 	static int PARTICLES_ID;
+
+	static MouseClickState MOUSE_STATE;
 public:
+	//public vars
+	static MouseClick LAST_MOUSE_CLICK;
+	static MouseClick MOUSE_CLICK;
+
+	//public methods
 	Game(void);
 	static int getObjectId();
 	static int getSpriteId();
@@ -67,6 +75,8 @@ public:
 	static int getMusicId();
 	static int getSoundId();
 	static int getParticlesId();
+
+	static MouseClick getLastMouseClick();
 
 	static int width();
 	static int height();

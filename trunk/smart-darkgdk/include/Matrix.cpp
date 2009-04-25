@@ -14,9 +14,11 @@ Matrix::~Matrix(void)
 {
 	dbDeleteMatrix(this->id);
 }
-void Matrix::make(float width,float depth,int xsegmented,int zsegmented)
+void Matrix::make(float w,float d,int xsegmented,int zsegmented)
 {
 	this->setId(Game::getMatrixId());
+	width = w;
+	depth = d;
 	dbMakeMatrix(this->id,width,depth,xsegmented,zsegmented);
 }
 
@@ -126,9 +128,22 @@ float Matrix::groundHeight(float x, float z)
 {
 	return dbGetGroundHeight(this->id,x,z);
 }
+float Matrix::groundHeight(Object *o)
+{
+	return this->groundHeight(o->getPositionX(),o->getPositionY());
+}
 float Matrix::matrixHeight(int tileX,int tileZ)
 {
 	return dbGetMatrixHeight(this->id,tileX,tileZ);
+}
+
+float Matrix::getWidth()
+{
+	return width;
+}
+float Matrix::getDepth()
+{
+	return depth;
 }
 
 /*

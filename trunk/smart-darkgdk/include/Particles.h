@@ -13,6 +13,7 @@ public:
 	Particles(void);
 	Particles(Image *t, int frequency, float radius);
 	Particles(ParticleType p, Image *t, int frequency, float x, float y, float z, float width, float height, float depth);
+	Particles(ParticleType p, char* filename, int frequency, float x, float y, float z, float width, float height, float depth);
 	~Particles(void);
 
 	void show();

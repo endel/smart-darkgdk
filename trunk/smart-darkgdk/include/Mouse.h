@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.h"
 
 class Mouse
 {
@@ -24,6 +25,7 @@ public:
 	static int positionY();
 	static int positionZ();
 
-	static int click();
+	static int press(MouseClick c=LEFT_CLICK);
+	static int click(MouseClick c=LEFT_CLICK);
 };
 
