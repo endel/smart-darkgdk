@@ -109,12 +109,18 @@ void Camera::lookAt(float x,float y, float z)
 }
 //--
 
-void Camera::rotate(float angleX,float angleY,float angleZ)
+void Camera::rotation(float angleX,float angleY,float angleZ)
 {
 	dbRotateCamera(this->id,angleX,angleY,angleZ);
 }
 //--
 
+void Camera::rotate(float angleX,float angleY,float angleZ)
+{
+	if(angleY > 0)	dbTurnCameraLeft(this->id, angleY);
+	if(angleY < 0)  dbTurnCameraRight(this->id, angleY);
+}
+//--
 
 
 void Camera::follow3DPerson(Object* objeto, float distance, float height, float alturaVisao)
@@ -124,7 +130,16 @@ void Camera::follow3DPerson(Object* objeto, float distance, float height, float 
 	this->localMove(0, height, -distance);
 	this->lookAt(objeto->getPositionX(), alturaVisao, objeto->getPositionZ());
 }
+//--
 
+void Camera::follow3DPersonTrabalho(Object* objeto, float distance, float height, float alturaVisao, float deltaMouse) //-->DELETAR
+{
+	this->position(objeto->getPositionX(), objeto->getPositionY(), objeto->getPositionZ()),
+	this->setToObjectOrientation(objeto);
+	this->rotate(0, deltaMouse, 0);
+	this->localMove(0, height, -distance);
+	this->lookAt(objeto->getPositionX(), alturaVisao, objeto->getPositionZ());
+}
 
 
 

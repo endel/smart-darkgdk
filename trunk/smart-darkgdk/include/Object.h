@@ -122,6 +122,9 @@ class Object :
 	//-->Move textura
 	void offsetTexture(float p_x, float p_y);
 
+	//-->Show boundingBox
+	void showBoundingBox();
+
 
 
 
@@ -155,6 +158,16 @@ class Object :
 
 
 	//----------------------------->COLLISION<---------------------------
+
+	//-->Cria box colisao
+	void makeBoxCollider(float p_x1, float p_y1, float p_z1, float p_x2, float p_y2, float p_z2);
+
+	//-->Cria box colisao
+	void makeBoxCollider();
+	
+	//-->Habilita colisao
+	void collisionEnabled(bool flag);
+
 
 	bool hit(Object* o);
 	Object* hit();
