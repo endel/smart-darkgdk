@@ -400,6 +400,26 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="smart"
+				>
+				<Filter
+					Name="cpp"
+					>
+					<File
+						RelativePath=".\smart-darkgdk\include\Lives.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="headers"
+					>
+					<File
+						RelativePath=".\smart-darkgdk\include\Lives.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Project"

@@ -33,6 +33,7 @@ public:
 
 	void show();
 	void hide();
+	void toggle();
 
 
 
@@ -42,7 +43,7 @@ public:
 	int getWidth();
 	int getHeight();
 	float getAngle();
-	int getIsVisible();
+	int isVisible();
 	int getColorR();
 	int getColorG();
 	int getColorB();

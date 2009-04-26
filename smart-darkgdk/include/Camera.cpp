@@ -132,6 +132,12 @@ void Camera::follow3DPerson(Object* objeto, float distance, float height, float 
 }
 //--
 
+void Camera::controlUsingArrowKeys(float velocity,float turnSpeed)
+{
+	dbControlCameraUsingArrowKeys(this->id,velocity,turnSpeed);
+}
+//--
+
 void Camera::follow3DPersonTrabalho(Object* objeto, float distance, float height, float alturaVisao, float deltaMouse) //-->DELETAR
 {
 	this->position(objeto->getPositionX(), objeto->getPositionY(), objeto->getPositionZ()),
