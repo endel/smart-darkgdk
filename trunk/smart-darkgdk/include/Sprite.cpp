@@ -154,7 +154,13 @@ Sprite::hide()
 {
 	dbHideSprite(this->id);
 }
-
+//--
+void
+Sprite::toggle()
+{
+	if (isVisible()) hide();
+	else show();
+}
 
 
 
@@ -202,7 +208,7 @@ Sprite::getAngle()
 //--
 
 int
-Sprite::getIsVisible()
+Sprite::isVisible()
 {
 	return dbSpriteVisible(this->id);
 }

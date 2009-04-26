@@ -23,6 +23,9 @@
 #include "include/Particles.h"
 #include "include/Sprite.h"
 
+//smart classes
+#include "include/Lives.h"
+
 //static classes
 #include "include/Key.h"
 #include "include/String.h"

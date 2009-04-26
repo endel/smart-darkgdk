@@ -62,6 +62,9 @@ public:
 	//-->Follow Object 3D Person
 	void follow3DPerson(Object* objeto, float distance, float height, float alturaVisao);
 
+	//-->Controlar com as setas do teclado: Utilizada para debuggar o cenário.
+	void controlUsingArrowKeys(float velocity=1,float turnSpeed=1);
+
 	//-->Seta a orientacao igual ao objeto
 	void setToObjectOrientation(Object *o);
 
