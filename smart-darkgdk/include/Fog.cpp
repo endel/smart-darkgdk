@@ -12,6 +12,12 @@ void Fog::enable()
 {
 	dbFogOn();
 }
+void Fog::enable(int r,int g,int b, int distance)
+{
+	dbFogOn();
+	setColor(r,g,b);
+	setDistance(distance);
+}
 void Fog::disable()
 {
 	dbFogOff();

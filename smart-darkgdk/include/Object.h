@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "Image.h"
 #include "AnimationClip.h"
+#include "DarkGDK.h"
 #include <map>
 using namespace std;
 
@@ -106,6 +107,9 @@ class Object :
 
 	//-->Seta iluminação
 	void setLight(bool l);
+	
+	//-->Seta cor de luz emissiva
+	void setEmissive(int r,int g,int b);
 
 	//-->Seta textura
 	void setImage(Image *t);
@@ -130,6 +134,8 @@ class Object :
 
 	//-->Show boundingBox
 	void showBoundingBox();
+
+	void showBounds(bool boxOnly = false);
 
 
 
@@ -173,7 +179,9 @@ class Object :
 	
 	//-->Habilita colisao
 	void collisionEnabled(bool flag);
-
+	
+	void setAutomaticCollision(float radius, int response=1);
+	void setCollisionType(eCollisionType c);
 
 	bool hit(Object* o);
 	Object* hit();

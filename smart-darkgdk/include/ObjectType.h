@@ -11,7 +11,6 @@ enum ObjectType
 	TRIANGLE
 };
 
-
 enum ParticleType 
 {
 	SNOW,

@@ -12,6 +12,16 @@ void String::draw(int x,int y,char* string)
 {
 	dbText(x,y,string);
 }
+
+void String::draw(int x,int y,int val)
+{
+	draw(x,y,convert(val));
+}
+void String::draw(int x,int y,float val)
+{
+	draw(x,y,convert(val));
+}
+
 void String::draw3D(char* string)
 {
 	dbText3D(string);

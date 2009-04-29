@@ -1,91 +1,118 @@
 #include "smart-darkgdk/Game.h"
 
+int score = 0;
+
+//Airplane control
+float	acceleration	= 0.03,
+		friction		= 0.01,
+		speed			= 0,
+		maxSpeed		= 2,
+
+		gravity			= 0.005,
+		flyAcceleration = 0.006,
+		gravitySpeed	= 0,
+		maxGravity		= 1;
+
 void DarkGDK ( void )
 {
-	//-->-----------------------------------------
-	//-->			INICIALIZATION
-	//-->-----------------------------------------
+	//Game configurations
+	Game::init("Before burner 0.0000001",800,600);
+	Game::setDir("Game01/Media/");
 
-	Game::init("Projeto Smart DarkGKK", 800, 600);
-	Game::setDir("Media/");
+	Fog::enable(255,255,255,2000);
 	
-	Mouse::hide();
-	
-	//-->-----------------------------------------
-	//-->				VARIABLES
-	//-->-----------------------------------------
+	Music *backgroundMusic = new Music("sound/Iron Maiden - Aces High.mid");
+	//backgroundMusic->loop();
 
-	Matrix* matrix = new Matrix(2000,2000,20,20);
-	matrix->prepareImage("Testes/grass_T.BMP");
+	Matrix *cenario = new Matrix(500,20000,10,400);
+	cenario->prepareImage("textures/grass_T.BMP");
 
+	Object *skybox = new Object(SPHERE, -2000);
+	skybox->setImage("textures/sky.jpg");
+	skybox->setLight(false);
 
-	//Object* playerAnimado = new Object(CUBE, 20); 
-	Object* playerAnimado = new Object("Testes/garota.x");
-	playerAnimado->position(0,0,0);
-	playerAnimado->rotate(0, 180, 0);
-	playerAnimado->fixPivot();
-	
-	playerAnimado->addAnimation("caminha", 570, 605, 6, WrapMode::LOOP);
-	playerAnimado->addAnimation("idle", 430, 542, 6, WrapMode::LOOP);
-	playerAnimado->addAnimation("zombie", 659, 686, 6, WrapMode::LOOP);
+	Object *jogador = new Object("models/airplane 2.x");
+	jogador->rotateY(180);
+	jogador->fixPivot();
+	jogador->position(cenario->getWidth()/2,5,20);
 
-	playerAnimado->playAnimation("idle");
-	
 	Camera* camera = new Camera();
-
-	Image* imageTeste = new Image("Testes/SpriteTeste.PNG");
-	Image* imageTeste2 = new Image("Testes/grass_T.BMP");
-	Sprite* spriteTeste = new Sprite(0, 0, imageTeste);
 	
-	float ratioT = 0.0f;
-
-	//-->-----------------------------------------
-	//-->			 LOOP PRINCIPAL
-	//-->-----------------------------------------
+	Lives *lives = new Lives("icons/live.png",3);
 	
-	while(Game::loop())
+	lives->setPosition(8,6,2);
+
+	while (Game::loop())
 	{
-			
+		//Draw score
+		String::draw(10,50,"Score: ");
+		String::draw(66,50,score);
 
-
-		playerAnimado->localMove((dbRightKey() - dbLeftKey()) * 3, 0, (dbUpKey() - dbDownKey()) * 3);
-
-		if((dbRightKey() - dbLeftKey()) || (dbUpKey() - dbDownKey()))
+		if (Key::check(KEY_W))
 		{
-			playerAnimado->crossFadeAnimation("caminha", 6.0f);
-		}
-		else
-		{
-			playerAnimado->crossFadeAnimation("idle", 6.0f);
+			if (speed < maxSpeed)
+				speed += acceleration;
 		}
 
-		if(dbRightKey())
+		if (Key::check(KEY_S))
 		{
-			playerAnimado->rotate(0, 3, 0);
-			playerAnimado->rotateY(2);
+			speed -= friction;
 		}
 
-		if(dbLeftKey())
+		if (Key::check(KEY_A))
 		{
-			playerAnimado->rotate(0, -3, 0);
-			playerAnimado->rotateY(-2);
+			jogador->rotateY(-2);
+		}
+		if (Key::check(KEY_D))
+		{
+			jogador->rotateY(2);
+		}
+
+		//speed friction
+		if (speed >= friction)
+			speed -= friction;
+
+		//let airplane to fly...
+		if (speed > maxSpeed-acceleration)
+		{
+			String::draw(100,100,"Máxima velocidade");
+			//if (gravitySpeed < maxGravity)
+			if (jogador->getPositionY() < 20)
+			{
+				if (gravitySpeed < maxGravity)
+				{
+					String::draw(100,130,"Acelerando pra cima");
+					gravitySpeed += flyAcceleration;
+				}
+			}
+		}
+
+		//player allways try to move
+		jogador->move(speed);
+		jogador->moveY(gravitySpeed);
+
+		//gravitation
+		if (jogador->getPositionY() > 1)
+		{
+			String::draw(100,160,"Caindo com gravidade...");
+			if (speed > maxSpeed-acceleration)
+			{
+				if (gravitySpeed > gravity)
+				gravitySpeed -= gravity;
+			} else
+			{
+				gravitySpeed -= gravity;
+			}
+		} else 
+		{
+			gravitySpeed = 0;
 		}
 		
-		spriteTeste->position(Mathf::Lerp(0, 60, ratioT, Transition::OutElasticBig), 0);	
+		skybox->position(jogador);
+		camera->setToFollow(jogador,ANGLE_Y,40,10,10,1);
 
-
-		//camera->setToFollow(playerAnimado,ANGLE_Y,250,180,20,1);
-		camera->follow3DPerson(playerAnimado, 500, 370, 120); 
-			
-		Mouse::setPosition(Game::width()/2,Game::height()/2);
-
-		playerAnimado->updateAnimation();
-
-		
-
-		//-->Atualiza Game
 		Game::refresh();
 	}
+	return ;
 
-	return;
 }

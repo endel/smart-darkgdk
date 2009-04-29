@@ -8,6 +8,8 @@ public:
 	
 	//setters
 	static void draw(int x,int y,char* string);
+	static void draw(int x,int y,int val);
+	static void draw(int x,int y,float val);
 	static void draw3D(char* string);
 	static void setColor(int alpha,int r,int g,int b);
 	static void setFont(char* typeface);
