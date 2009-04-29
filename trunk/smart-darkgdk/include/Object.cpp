@@ -1,6 +1,7 @@
 #include "ObjectType.h"
 #include "Object.h"
 #include "../Game.h"
+#include "DarkGDK.h"
 #include "Image.h"
 #include "Mesh.h"
 #include "VertexShader.h"
@@ -392,6 +393,12 @@ void Object::setLight(bool l)
 }
 //--
 
+void Object::setEmissive(int r,int g,int b)
+{
+	dbSetObjectEmissive(this->id, RGB(r,g,b));
+}
+//--
+
 void Object::setImage(Image *t)
 {
 	dbTextureObject(this->id,t->id);
@@ -451,9 +458,13 @@ void Object::offsetTexture(float p_x, float p_y)
 void Object::showBoundingBox()
 {
 	dbShowObjectBounds(this->id);
-
 }
 
+
+void Object::showBounds(bool boxOnly)
+{
+	dbShowObjectBounds(this->id,boxOnly);
+}
 
 
 
@@ -608,6 +619,23 @@ void Object::makeBoxCollider(float p_x1, float p_y1, float p_z1, float p_x2, flo
 void Object::makeBoxCollider()
 {
 	dbSetObjectCollisionToBoxes(this->id);
+}
+//--
+
+void Object::setAutomaticCollision(float radius, int response)
+{
+	dbAutomaticObjectCollision(this->id,radius,response);
+}
+//--
+
+void Object::setCollisionType(eCollisionType c)
+{
+	switch (c)
+	{
+		case COLLISION_POLYGON: dbSetObjectCollisionToPolygons(this->id); break;
+		case COLLISION_SPHERE: dbSetObjectCollisionToSpheres(this->id); break;
+		default: COLLISION_BOX: dbSetObjectCollisionToBoxes(this->id); break;
+	}
 }
 //--
 
