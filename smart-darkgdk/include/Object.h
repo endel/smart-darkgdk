@@ -112,8 +112,8 @@ class Object :
 	void setEmissive(int r,int g,int b);
 
 	//-->Seta textura
-	void setImage(Image *t);
-	Image *setImage(char* imagePath);
+	void setTexture(Image *t,int mode = -1,int mipGeneration = -1);
+	Image *setTexture(char* imagePath,int mode = -1,int mipGeneration = -1);
 
 	//-->Aplica Shaders
 	void applyShader(VertexShader *s);
@@ -134,8 +134,19 @@ class Object :
 
 	//-->Show boundingBox
 	void showBoundingBox();
-
 	void showBounds(bool boxOnly = false);
+
+
+	void setColor(int r,int g,int b);
+	
+	void lock();
+	void unlock();
+	void toggleLock();
+	
+	void setSmoothing(float angle);
+	void setSmoothing(int percentage);
+	void scaleTexture(float u=1, float v=1);
+	void scrollTexture(float x, float y);
 
 
 
@@ -200,9 +211,15 @@ class Object :
 
 
 private:
+	//----------------------------->FUNCTIONS<--------------------------
+	//-->Allows object animation (used only on constructor)
+	void allowAnimation();
+
+
 	//----------------------------->VARIABLES<--------------------------
 	bool	pixelShaderOn;
 	bool	vertexShaderOn;
+	bool	locked;
 
 	//-->Animation
 	float animFrame;

@@ -73,7 +73,7 @@ void Lives::setPosition(int p_x, int p_y, int p_distance, bool p_horizontal)
 void Lives::add()
 {
 	sprites.push_back(new Sprite(filename));
-	setPosition(x, y, distance=2, horizontal);
+	setPosition(x, y, distance, horizontal);
 }
 
 void Lives::remove()
