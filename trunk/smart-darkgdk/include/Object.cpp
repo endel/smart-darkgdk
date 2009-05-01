@@ -16,8 +16,7 @@
 Object::Object(int id)
 {
 	this->setId(id);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -25,8 +24,7 @@ Object::Object(char* filename)
 {
 	this->setId(Game::getObjectId());
 	dbLoadObject(filename,this->id);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -34,8 +32,7 @@ Object::Object(Mesh *m,Image *t)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObject(this->id,m->id,t->id);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -43,8 +40,7 @@ Object::Object(float width,float height,float depth)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectBox(this->id,width,height,depth);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -58,8 +54,7 @@ Object::Object(ObjectType t, float size)
 		case CYLINDER: dbMakeObjectCylinder(this->id,size);break;
 		case SPHERE: dbMakeObjectSphere(this->id,size);break;
 	}
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -67,8 +62,7 @@ Object::Object(Object* second, int limb)
 {
 	this->setId(Game::getObjectId());
 	//dbMakeObjectFromLimb(
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -76,8 +70,7 @@ Object::Object(float width, float height)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectPlain(this->id,width,height);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
@@ -85,14 +78,21 @@ Object::Object(float x1, float y1, float z1, float x2, float y2, float z2, float
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectTriangle(this->id,x1,y1,z1, x2,y2,z2, x3,y3,z3);
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	allowAnimation();
 }
 //--
 
 Object::~Object(void)
 {
 	dbDeleteObject(this->id);
+}
+//--
+
+void Object::allowAnimation()
+{
+	locked = false;
+	animationState = AnimationState::STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
 }
 
 
@@ -399,14 +399,19 @@ void Object::setEmissive(int r,int g,int b)
 }
 //--
 
-void Object::setImage(Image *t)
+void Object::setTexture(Image *t,int mode,int mipGeneration)
 {
 	dbTextureObject(this->id,t->id);
+	
+	if (mode != -1 || mipGeneration != -1)
+		dbSetObjectTexture(this->id,mode,mipGeneration);
 }
-Image *Object::setImage(char* imagePath)
+Image *Object::setTexture(char* imagePath,int mode,int mipGeneration)
 {
 	Image* t = new Image(imagePath);
-	this->setImage(t);
+	this->setTexture(t);
+	if (mode != -1 || mipGeneration != -1)
+		dbSetObjectTexture(this->id,mode,mipGeneration);
 	return t;
 }
 //--
@@ -466,9 +471,48 @@ void Object::showBounds(bool boxOnly)
 	dbShowObjectBounds(this->id,boxOnly);
 }
 
+void Object::setColor(int r,int g,int b)
+{
+	dbColorObject(this->id,RGB(r,g,b));
+}
 
+void Object::lock()
+{
+	locked = true;
+	dbLockObjectOn(this->id);
+}
 
+void Object::unlock()
+{
+	locked = false;
+	dbLockObjectOff(this->id);
+}
 
+void Object::toggleLock()
+{
+	if (locked) unlock();
+	else lock();
+}
+
+void Object::setSmoothing(float angle)
+{
+	dbSetObjectSmoothing(this->id,angle);
+}
+
+void Object::setSmoothing(int percentage)
+{
+	dbSetObjectSmoothing(this->id,percentage);
+}
+
+void Object::scaleTexture(float u, float v)
+{
+	dbScaleObjectTexture(this->id,u,v);
+}
+
+void Object::scrollTexture(float x, float y)
+{
+	dbScrollObjectTexture(this->id,x,y);
+}
 
 
 //------------------------------------------------

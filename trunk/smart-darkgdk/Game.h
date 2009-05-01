@@ -36,6 +36,7 @@
 #include "include/Mathf.h"
 #include "include/Transition.h"
 
+#define random(x) dbRnd(x)
 
 //game
 class Game

@@ -22,14 +22,14 @@ void Matrix::make(float w,float d,int xsegmented,int zsegmented)
 	dbMakeMatrix(this->id,width,depth,xsegmented,zsegmented);
 }
 
-void Matrix::prepareImage(Image *t,int across,int down)
+void Matrix::prepareTexture(Image *t,int across,int down)
 {
 	dbPrepareMatrixTexture(this->id,t->id,across,down);
 }
-Image* Matrix::prepareImage(char* imagePath,int across,int down)
+Image* Matrix::prepareTexture(char* imagePath,int across,int down)
 {
 	Image* t = new Image(imagePath);
-	this->prepareImage(t,across,down);
+	this->prepareTexture(t,across,down);
 	return t;
 }
 void Matrix::position(float x,float y,float z)
