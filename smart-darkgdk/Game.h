@@ -36,7 +36,12 @@
 #include "include/Mathf.h"
 #include "include/Transition.h"
 
-#define random(x) dbRnd(x)
+//std classes
+#include <math.h>
+
+#define random(x)	dbRnd(x)
+#define SIN(x)		sin((double)(x))
+#define COS(x)		cos((double)(x))
 
 //game
 class Game

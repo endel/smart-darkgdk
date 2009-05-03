@@ -12,7 +12,7 @@ int LARGURA_CENARIO = 500;
 float	acceleration	= 0.03,
 		friction		= 0.01,
 		speed			= 0,
-		maxSpeed		= 10,
+		maxSpeed		= 3,
 
 		gravity			= 0.005,
 		flyAcceleration = 0.006,
@@ -21,6 +21,7 @@ float	acceleration	= 0.03,
 
 float	rotation				= 0,
 		rotationAcceleration	= 0.1,
+		rotationReturning		= 0.5,
 		rotationFriction		= 0.03,
 		maxRotation				= 1;
 
@@ -38,7 +39,7 @@ void DarkGDK ( void )
 	
 	//game sounds
 	Music *backgroundMusic = new Music("sound/Iron Maiden - Aces High.mid");
-	//backgroundMusic->loop();
+	backgroundMusic->loop();
 
 	//create ground matrix
 	Matrix *cenario = new Matrix( LARGURA_CENARIO, PROFUNDIDADE_CENARIO, 10, 400 );
@@ -52,13 +53,13 @@ void DarkGDK ( void )
 		{
 			//loses the pointer; don't need it in this little demo.
 			Object *parede = new Object(1, 200, profundidade_parede_unica);
-			parede->position(LARGURA_CENARIO*j, 0, profundidade_parede_unica*i);
+			parede->setPosition(LARGURA_CENARIO*j, 0, profundidade_parede_unica*i);
 			parede->setTexture("textures/wall.jpg");
 			parede->scaleTexture( profundidade_parede_unica/250, 1 );
 			parede->setLight(false);
 		}
 	}
-
+	
 	//create skysphere
 	Object *skysphere = new Object( SPHERE, -4000 );
 	skysphere->setTexture("textures/sky.jpg");
@@ -67,13 +68,11 @@ void DarkGDK ( void )
 	//create player
 	Object *jogador = new Object("models/airplane 2.x");
 	jogador->rotateY(180);
-	jogador->position(jogador->getSizeX()/2,jogador->getSizeY()/2,jogador->getSizeZ()/2);
 	jogador->fixPivot();
-	jogador->position( cenario->getWidth()/2, 5, 50 );
-	jogador->setSmoothing(50);
+	jogador->setPosition( cenario->getWidth()/2, 5, 50 );
 
 	//Objetos
-	for (int i=0;i<500;i++)
+	for (int i=0;i<100;i++)
 	{
 		Object *temp = new Object(SPHERE, 10);
 		temp->position(
@@ -94,35 +93,49 @@ void DarkGDK ( void )
 		//Draw score
 		String::draw(10,50,"Score: ");
 		String::draw(66,50,score);
-
+		
+		//up key
 		if ( Key::check(KEY_W) )
 		{
 			if (speed < maxSpeed)
 				speed += acceleration;
 		}
-
+		
+		//down key
 		if ( Key::check(KEY_S) )
 		{
 			speed -= friction;
 		}
-
+		
+		//left key
 		if ( Key::check(KEY_A) )
 		{
 			if (rotation < maxRotation-rotationAcceleration)
-			{
 				rotation += rotationAcceleration;
-				//jogador->moveX(-rotation);
-			}
 		}
+		
+		//right key
 		if ( Key::check(KEY_D) )
 		{
 			if (rotation > -(maxRotation-rotationAcceleration))
-			{
 				rotation -= rotationAcceleration;
-				//jogador->moveX(-rotation);
+		}
+		
+		//left or right key --> rotate player 
+		if (Key::check(KEY_A) || Key::check(KEY_D))
+		{
+			jogador->rotateZ( rotation );
+		} else {
+		//no rotation --> reset rotation to zero
+			if (jogador->getAngleZ() > rotationReturning)
+			{
+				jogador->rotateZ( -rotationReturning );
+			} else if (jogador->getAngleZ() < -rotationReturning)
+			{
+				jogador->rotateZ( rotationReturning );
 			}
 		}
-
+		
 		//speed friction
 		if ( speed >= friction )
 			speed -= friction;
@@ -130,28 +143,21 @@ void DarkGDK ( void )
 		//let airplane to fly...
 		if ( speed > maxSpeed-acceleration )
 		{
-			String::draw(100,100,"Máxima velocidade");
-			//if (gravitySpeed < maxGravity)
 			if ( jogador->getPositionY() < 20 )
-			{
 				if ( gravitySpeed < maxGravity )
-				{
-					String::draw(100,130,"Acelerando pra cima");
 					gravitySpeed += flyAcceleration;
-				}
-			}
 		}
 		
 		//player allways try to move
 		jogador->move( speed );
-		jogador->moveY( gravitySpeed );
-		jogador->rotateZ( rotation );
+		jogador->positionY(gravitySpeed);
+		jogador->positionX( -rotation );
 
 		//restore rotation point
-		if ( rotation > rotationFriction )
+		if ( rotation > rotationFriction)
 		{
 			rotation -= rotationFriction;
-		} else
+		} else if ( rotation < -rotationFriction )
 		{
 			rotation += rotationFriction;
 		}
@@ -159,11 +165,10 @@ void DarkGDK ( void )
 		//gravitation
 		if ( jogador->getPositionY() > 1 )
 		{
-			String::draw(100,160,"Caindo com gravidade...");
 			if ( speed > maxSpeed-acceleration )
 			{
 				if ( gravitySpeed > gravity )
-				gravitySpeed -= gravity;
+					gravitySpeed -= gravity;
 			} else
 			{
 				gravitySpeed -= gravity;
@@ -172,8 +177,23 @@ void DarkGDK ( void )
 		{
 			gravitySpeed = 0;
 		}
+
+		//collision detection
+		vector<Object*>::iterator it = addPoints.begin();
+		while (it != addPoints.end())
+		{
+			Object* obj1 = (*it);
+			Object* obj2 = obj1->collision();
+			it++;
+			// se colidiu com o jogador
+			if (obj2->id == jogador->id)
+			{
+				score++;
+				delete obj1;
+			};
+		}
 		
-		skysphere->position( jogador );
+		skysphere->setPosition( jogador );
 		camera->setToFollow( jogador, ANGLE_Y, 40, 10, cameraSmooth, 1 );
 
 		Game::refresh();
