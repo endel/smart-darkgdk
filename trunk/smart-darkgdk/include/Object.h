@@ -17,6 +17,14 @@ class Object :
 	public CommonObject
 {
 	public:
+
+	//---------------------->OPERATOR OVERLOADING<----------------------
+	bool operator==(Object* o);
+
+
+
+
+
 	//------------------->CONSTRUCTORS / DESTRUCTORS<-------------------
 	Object(int id);
 	Object(char* filename);
@@ -65,12 +73,18 @@ class Object :
 
 	//----------------------------->TRANSFORM<---------------------------
 
-	//-->Seta posição objeto
+	//-->Seta posição do objeto
+	void setPosition(float x,float y, float z);
+	void setPositionX(float val);
+	void setPositionY(float val);
+	void setPositionZ(float val);
+	void setPosition(Object* o);
+
+	//-->Adiciona posição ao objeto
 	void position(float x,float y, float z);
 	void positionX(float val);
 	void positionY(float val);
 	void positionZ(float val);
-	void position(Object* o);
 
 	//-->Scala objeto
 	void scale(float xSize, float ySize, float zSize);

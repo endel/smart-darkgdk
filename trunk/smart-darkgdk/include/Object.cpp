@@ -10,6 +10,15 @@
 
 
 //------------------------------------------------
+//			  OPERATOR OVERLOADING
+//------------------------------------------------
+
+bool Object::operator==(Object* o)
+{
+	return (this->id == o->id);
+}
+
+//------------------------------------------------
 //			  CONSTRUCTORS / DESTRUCTORS
 //------------------------------------------------
 
@@ -271,31 +280,55 @@ Object::updateAnimation()
 //------------------------------------------------
 //					TRANSFORM
 //------------------------------------------------
-void Object::position(float x,float y, float z)
+void Object::setPosition(float x,float y, float z)
 {
 	dbPositionObject(this->id, x, y, z);
 }
-void Object::positionX(float val)
+void Object::setPositionX(float val)
 {
-	this->position(val,this->getPositionY(),this->getPositionZ());
+	this->setPosition(val,this->getPositionY(),this->getPositionZ());
 }
 //--
-void Object::positionY(float val)
+void Object::setPositionY(float val)
 {
-	this->position(this->getPositionX(),val,this->getPositionZ());
+	this->setPosition(this->getPositionX(),val,this->getPositionZ());
 }
 //--
-void Object::positionZ(float val)
+void Object::setPositionZ(float val)
 {
-	this->position(this->getPositionX(),this->getPositionY(),val);
+	this->setPosition(this->getPositionX(),this->getPositionY(),val);
 }
 //--
 
-void Object::position(Object* o)
+void Object::setPosition(Object* o)
 {
 	dbPositionObject(this->id,o->getPositionX(),o->getPositionY(),o->getPositionZ());
 }
 //--
+
+void Object::position(float x,float y, float z)
+{
+	setPosition(getPositionX() + x, getPositionY() + y, getPositionZ() + z);
+}
+
+void Object::positionX(float val)
+{
+	setPositionX(getPositionX() + val);
+}
+//--
+
+void Object::positionY(float val)
+{
+	setPositionY(getPositionY() + val);
+}
+//--
+
+void Object::positionZ(float val)
+{
+	setPositionZ(getPositionZ() + val);
+}
+//--
+
 
 void Object::scale(float xSize, float ySize, float zSize)
 {
