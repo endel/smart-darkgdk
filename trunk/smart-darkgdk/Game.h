@@ -11,6 +11,7 @@
 #include "include/Camera.h"
 #include "include/Image.h"
 #include "include/Mesh.h"
+#include "include/Limb.h"
 #include "include/Matrix.h"
 #include "include/Matrix4.h"
 #include "include/Object.h"
@@ -37,7 +38,12 @@
 #include "include/Transition.h"
 
 //std classes
+#include <vector>
+#include <string>
+#include <map>
 #include <math.h>
+
+using namespace std;
 
 #define random(x)	dbRnd(x)
 #define SIN(x)		sin((double)(x))
@@ -50,6 +56,7 @@ private:
 	static int OBJECT_ID;
 	static int SPRITE_ID;
 	static int IMAGE_ID;
+	static int LIMB_ID;
 	static int MESH_ID;
 	static int MATRIX_ID;
 	static int MATRIX4_ID;
@@ -74,6 +81,7 @@ public:
 	static int getSpriteId();
 	static int getImageId();
 	static int getMeshId();
+	static int getLimbId();
 	static int getMatrixId();
 	static int getMatrix4Id();
 	static int getCameraId();

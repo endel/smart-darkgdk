@@ -12,6 +12,7 @@ using namespace std;
 class VertexShader;
 class PixelShader;
 class Effect;
+class Limb;
 
 class Object : 
 	public CommonObject
@@ -31,7 +32,7 @@ class Object :
 	Object(Mesh *m,Image *t);
 	Object(float width,float height,float depth);
 	Object(ObjectType t, float size);
-	Object(Object* second, int limb);
+	Object(Object* second, Limb *l);
 	Object(float width, float height);
 	Object(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3);
 	~Object();
@@ -88,6 +89,7 @@ class Object :
 
 	//-->Scala objeto
 	void scale(float xSize, float ySize, float zSize);
+	void scale(float xyz);
 
 	//-->Seta rotacao objeto para tantos graus
 	void rotation(float xAngle, float yAngle, float zAngle);
@@ -161,6 +163,12 @@ class Object :
 	void setSmoothing(int percentage);
 	void scaleTexture(float u=1, float v=1);
 	void scrollTexture(float x, float y);
+
+
+
+	//----------------------------->LIMBS<---------------------------
+	Limb* addLimb(Object* o);
+	void performCheckListForLimbs();
 
 
 

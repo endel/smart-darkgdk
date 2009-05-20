@@ -6,6 +6,7 @@ int Game::OBJECT_ID = 0;
 int Game::SPRITE_ID = 0;
 int Game::IMAGE_ID = 0;
 int Game::MESH_ID = 0;
+int Game::LIMB_ID = 0;
 int Game::MATRIX_ID = 0;
 int Game::MATRIX4_ID = 0;
 int Game::LIGHT_ID = 0;
@@ -49,6 +50,10 @@ int Game::getImageId(){
 }
 int Game::getMeshId() {
 	return ++MESH_ID;
+}
+int Game::getLimbId()
+{
+	return ++LIMB_ID;
 }
 int Game::getMatrixId() {
 	return ++MATRIX_ID;

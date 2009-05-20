@@ -191,6 +191,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\smart-darkgdk\include\Limb.h"
+						>
+					</File>
+					<File
 						RelativePath=".\smart-darkgdk\include\Matrix.h"
 						>
 					</File>
@@ -260,6 +264,10 @@
 					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Light.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Limb.cpp"
 						>
 					</File>
 					<File
@@ -410,12 +418,20 @@
 						RelativePath=".\smart-darkgdk\include\Lives.cpp"
 						>
 					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\MenuItem.cpp"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="headers"
 					>
 					<File
 						RelativePath=".\smart-darkgdk\include\Lives.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\MenuItem.h"
 						>
 					</File>
 				</Filter>

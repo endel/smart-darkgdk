@@ -4,6 +4,7 @@
 #include "DarkGDK.h"
 #include "Image.h"
 #include "Mesh.h"
+#include "Limb.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "Effect.h"
@@ -67,10 +68,10 @@ Object::Object(ObjectType t, float size)
 }
 //--
 
-Object::Object(Object* second, int limb)
+Object::Object(Object* second, Limb *l)
 {
 	this->setId(Game::getObjectId());
-	//dbMakeObjectFromLimb(
+	dbMakeObjectFromLimb( this->id, second->id, l->id);
 	allowAnimation();
 }
 //--
@@ -100,8 +101,8 @@ Object::~Object(void)
 void Object::allowAnimation()
 {
 	locked = false;
-	animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	animationState = STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, getTotalFrames(), 1, LOOP);
 }
 
 
@@ -142,6 +143,7 @@ Object::addAnimation(char* p_name, int p_frameInicial, int p_frameFinal, int p_v
 {	
 	this->animations[p_name] = new AnimationClip(p_name, p_frameInicial, p_frameFinal, p_velocidade, p_wrapMode);
 }
+
 //--
 
 void
@@ -155,7 +157,7 @@ Object::playAnimation(char* p_animation)
 		this->animFrame = newAnimation->frameInicial;
 		this->animVelocity = newAnimation->velocidade;
 
-		this->animationState = AnimationState::RUNNING;
+		this->animationState = AnimationState::PLAYING;
 	}
 }
 //--
@@ -213,7 +215,7 @@ Object::updateAnimation()
 			{
 				this->animInterpPercent = 100.0f;
 				dbSetObjectInterpolation(this->id, (int)this->animInterpPercent);
-				this->animationState = AnimationState::RUNNING;
+				this->animationState = AnimationState::PLAYING;
 			}
 			else
 			{
@@ -224,8 +226,8 @@ Object::updateAnimation()
 			break;
 		}
 
-		//-->RUNNING
-		case AnimationState::RUNNING:
+		//-->PLAYING
+		case AnimationState::PLAYING:
 		{
 			this->animFrame += this->animVelocity * 0.1f;
 
@@ -334,6 +336,13 @@ void Object::scale(float xSize, float ySize, float zSize)
 {
 	dbScaleObject(this->id, xSize, ySize, zSize);
 }
+//--
+
+void Object::scale(float xyz)
+{
+	scale(xyz,xyz,xyz);
+}
+
 //--
 
 void Object::rotation(float xAngle, float yAngle, float zAngle)
@@ -547,6 +556,20 @@ void Object::scrollTexture(float x, float y)
 	dbScrollObjectTexture(this->id,x,y);
 }
 
+//------------------------------------------------
+//					COLLISION
+//------------------------------------------------
+
+Limb* Object::addLimb(Object* o)
+{
+	return new Limb(o, this);
+}
+
+void Object::performCheckListForLimbs()
+{
+	dbPerformCheckListForObjectLimbs( this->id );
+}
+
 
 //------------------------------------------------
 //					GETTERS
@@ -676,10 +699,6 @@ float Object::getScreenY()
 	return dbObjectScreenY(this->id);
 }
 //--
-
-
-
-
 
 
 

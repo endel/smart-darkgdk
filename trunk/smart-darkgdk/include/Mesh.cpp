@@ -5,6 +5,12 @@ Mesh::Mesh(void)
 {
 }
 
+Mesh::Mesh(Object* o)
+{
+	setId(Game::getMeshId());
+	dbMakeMeshFromObject(this->id,o->id);
+}
+
 Mesh::Mesh(char* filename)
 {
 }
