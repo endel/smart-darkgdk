@@ -28,7 +28,7 @@ enum ANGLE
 enum AnimationState
 {
 	STOPPED, //->Parado em determinado frame
-	RUNNING, //->Alguma animação rolando
+	PLAYING, //->Alguma animação rolando
 	CHANGING //->Fade entre duas animações
 };
 

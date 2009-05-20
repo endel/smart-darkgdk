@@ -8,6 +8,7 @@ Sprite::Sprite(Image* p_image)
 {
 	this->setId(Game::getSpriteId());
 	dbSprite(this->id, 0, 0, p_image->id);
+
 	resetTextureOffset();
 }
 //--
@@ -40,6 +41,19 @@ Sprite::Sprite(int p_x, int p_y, Image* p_image, int p_framesAcross, int p_frame
 
 	resetTextureOffset();
 }
+//--
+
+Sprite::Sprite(char* filename, char* animation_name, int p_framesAcross, int p_framesDown)
+{
+	this->setId(Game::getSpriteId());
+
+	Image* img = new Image(filename);
+	dbCreateAnimatedSprite(this->id, animation_name, p_framesAcross, p_framesDown, img->id);
+
+	resetTextureOffset();
+}
+
+
 //--
 Sprite::~Sprite(void)
 {
