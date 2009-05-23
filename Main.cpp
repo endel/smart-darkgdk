@@ -3,40 +3,50 @@
 void DarkGDK ( void )
 {
 	//Game configurations
-	Game::init( "Before burner 0.0000001", 800, 600 );
-	Game::setDir("Game01/Media/");
-
-	Object *player = new Object(CUBE,20);
-	Matrix *matrix = new Matrix(1000,1000,20,20);
-	
-	Limb* limb = player->addLimb(new Object(CUBE, 10));
-	limb->offset(20,0,20);
+	Game::init( "Smart DarkGDK - Testing features", 800, 600 );
+	Game::setDir("Media/");
 
 	Camera *camera = new Camera();
+
+	BSP::load("maps/20kdm2.pk3","maps/20kdm2.bsp");
+	BSP::setCamera(camera);
+	BSP::enableAllObjectCollisions();
+
+	Object *player = new Object(SPHERE,1);
+	player->position(50,30,50);	
+
+	BSP::setCollisionThreshold(player, 1);
+
+	Limb* limb = player->addLimb(new Object(CUBE, 0.2));
+	limb->offset(0.3,0,0.3);
 
 	while ( Game::loop() )
 	{
 
 		if (Key::up())
 		{
-			player->move(2);
+			player->move(0.5);
 		}
 		if (Key::down())
 		{
-			player->move(-2);
+			player->move(-0.5);
 		}
 		if (Key::left())
 		{
-			player->rotateY(-0.5);
+			player->rotateY(-0.8);
 		}
 		if (Key::right())
 		{
-			player->rotateY(0.5);
+			player->rotateY(0.8);
 		}
 
-		camera->setToFollow( player, ANGLE_Y, 40, 10, 10, 1 );
+		if (!BSP::getCollisionHit(player)) {
+			player->moveY(-0.1);
+		}
+
+		camera->setToFollow( player, ANGLE_Y, 3, 1, 10, 1 );
 		Game::refresh();
 	}
-	return ;
+	return;
 
 }

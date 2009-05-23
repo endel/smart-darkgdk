@@ -59,6 +59,10 @@
 #define KEY_ALT_L 56
 #define KEY_ALT_R 184
 #define KEY_SPACE 57
+#define KEY_UP 200
+#define KEY_DOWN 208
+#define KEY_RIGHT 205
+#define KEY_LEFT 203
 #define KEY_RETURN 28
 
 #define KEY_F1 59

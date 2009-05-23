@@ -178,7 +178,7 @@ public:
 	bool  isPlaying();
 	bool  isVisible();
 	bool  isLooping();
-	bool  isExists();
+	bool  exists();
 	float getPositionX();
 	float getPositionY();
 	float getPositionZ();
@@ -230,8 +230,7 @@ public:
 
 private:
 	//----------------------------->FUNCTIONS<--------------------------
-	//-->Allows object animation (used only on constructor)
-	void allowAnimation();
+	void _init();
 
 
 	//----------------------------->VARIABLES<--------------------------
