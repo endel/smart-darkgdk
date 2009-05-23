@@ -39,8 +39,10 @@ Camera::~Camera(void)
 	dbDeleteCamera(this->id);
 }
 
-
-
+char* Camera::getClassName()
+{
+	return "Camera";
+}
 
 
 

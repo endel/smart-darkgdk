@@ -1,6 +1,8 @@
 #pragma once
+#include "EventDispatcher.h"
 
-class CommonObject
+class CommonObject 
+	: public EventDispatcher
 {
 protected:
 	void setId(int n);

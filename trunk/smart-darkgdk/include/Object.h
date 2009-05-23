@@ -1,5 +1,5 @@
 #pragma once
-#include "CommonObject.h"
+#include "CommonBSPCollider.h"
 #include "ObjectType.h"
 #include "Mesh.h"
 #include "Image.h"
@@ -8,17 +8,15 @@
 #include <map>
 using namespace std;
 
-
 class VertexShader;
 class PixelShader;
 class Effect;
 class Limb;
 
 class Object : 
-	public CommonObject
+	public CommonBSPCollider
 {
-	public:
-
+public:
 	//---------------------->OPERATOR OVERLOADING<----------------------
 	bool operator==(Object* o);
 
@@ -36,6 +34,7 @@ class Object :
 	Object(float width, float height);
 	Object(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3);
 	~Object();
+	char* getClassName();
 
 
 
@@ -227,9 +226,6 @@ class Object :
 	float getCollisionCenterY();
 	float getCollisionCenterZ();
 	float intersect(float x, float y, float z, float newX, float newY, float newZ);
-
-
-
 
 
 private:

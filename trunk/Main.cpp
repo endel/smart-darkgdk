@@ -1,6 +1,5 @@
 #include "smart-darkgdk/Game.h"
 
-
 void DarkGDK ( void )
 {
 	//Game configurations
