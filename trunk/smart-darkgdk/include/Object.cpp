@@ -8,6 +8,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "Effect.h"
+#include "BSP.h"
 
 
 //------------------------------------------------
@@ -26,7 +27,7 @@ bool Object::operator==(Object* o)
 Object::Object(int id)
 {
 	this->setId(id);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -34,7 +35,7 @@ Object::Object(char* filename)
 {
 	this->setId(Game::getObjectId());
 	dbLoadObject(filename,this->id);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -42,7 +43,7 @@ Object::Object(Mesh *m,Image *t)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObject(this->id,m->id,t->id);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -50,7 +51,7 @@ Object::Object(float width,float height,float depth)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectBox(this->id,width,height,depth);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -65,7 +66,7 @@ Object::Object(ObjectType t, float size)
 		case CYLINDER: dbMakeObjectCylinder(this->id,size);break;
 		case SPHERE: dbMakeObjectSphere(this->id,size);break;
 	}
-	allowAnimation();
+	_init();
 }
 
 //--
@@ -74,7 +75,7 @@ Object::Object(Object* second, Limb *l)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectFromLimb( this->id, second->id, l->id);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -82,7 +83,7 @@ Object::Object(float width, float height)
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectPlain(this->id,width,height);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -90,7 +91,7 @@ Object::Object(float x1, float y1, float z1, float x2, float y2, float z2, float
 {
 	this->setId(Game::getObjectId());
 	dbMakeObjectTriangle(this->id,x1,y1,z1, x2,y2,z2, x3,y3,z3);
-	allowAnimation();
+	_init();
 }
 //--
 
@@ -106,8 +107,12 @@ char* Object::getClassName()
 }
 //--
 
-void Object::allowAnimation()
+void Object::_init()
 {
+	if (BSP::getAllCollisionsEnabled()) {
+		if (this->exists()) BSP::setCollisionOn(this);
+	}
+
 	locked = false;
 	animationState = STOPPED;
 	this->currentAnimation = new AnimationClip("none", 0, getTotalFrames(), 1, LOOP);
@@ -165,7 +170,7 @@ Object::playAnimation(char* p_animation)
 		this->animFrame = newAnimation->frameInicial;
 		this->animVelocity = newAnimation->velocidade;
 
-		this->animationState = AnimationState::PLAYING;
+		this->animationState = PLAYING;
 	}
 }
 //--
@@ -182,7 +187,7 @@ Object::crossFadeAnimation(char* p_animation, float p_switchVelocity)
 		this->animInterpPercent = 0.0f;
 		this->animSwitchVelocity = p_switchVelocity;
 
-		this->animationState = AnimationState::CHANGING;
+		this->animationState = CHANGING;
 	}
 }
 //--
@@ -190,8 +195,8 @@ Object::crossFadeAnimation(char* p_animation, float p_switchVelocity)
 void 
 Object::stopAnimation()
 {
-	this->animationState = AnimationState::STOPPED;
-	this->currentAnimation = new AnimationClip("none", 0, 0, 0, WrapMode::LOOP);
+	this->animationState = STOPPED;
+	this->currentAnimation = new AnimationClip("none", 0, 0, 0, LOOP);
 }
 //--
 
@@ -208,14 +213,14 @@ Object::updateAnimation()
 	switch(this->animationState)
 	{
 		//-->STOPPED
-		case AnimationState::STOPPED:
+		case STOPPED:
 		{
 			dbSetObjectFrame(this->id, (int)this->animFrame);
 			break;
 		}
 
 		//-->CHANGING
-		case AnimationState::CHANGING:
+		case CHANGING:
 		{
 			this->animInterpPercent += this->animSwitchVelocity;
 			
@@ -223,7 +228,7 @@ Object::updateAnimation()
 			{
 				this->animInterpPercent = 100.0f;
 				dbSetObjectInterpolation(this->id, (int)this->animInterpPercent);
-				this->animationState = AnimationState::PLAYING;
+				this->animationState = PLAYING;
 			}
 			else
 			{
@@ -235,11 +240,11 @@ Object::updateAnimation()
 		}
 
 		//-->PLAYING
-		case AnimationState::PLAYING:
+		case PLAYING:
 		{
 			this->animFrame += this->animVelocity * 0.1f;
 
-			if(this->currentAnimation->wrapMode == WrapMode::LOOP)
+			if(this->currentAnimation->wrapMode == LOOP)
 			{
 				if(this->animVelocity >= 0)
 				{
@@ -256,14 +261,14 @@ Object::updateAnimation()
 					}
 				}
 			}
-			else if(currentAnimation->wrapMode == WrapMode::ONCE)
+			else if(currentAnimation->wrapMode == ONCE)
 			{
 				if(this->animVelocity >= 0)
 				{
 					if(this->animFrame > this->currentAnimation->frameFinal)
 					{
 						this->animFrame = this->currentAnimation->frameFinal;
-						this->animationState = AnimationState::STOPPED;
+						this->animationState = STOPPED;
 					}
 				}
 				else
@@ -271,7 +276,7 @@ Object::updateAnimation()
 					if(this->animFrame < this->currentAnimation->frameInicial)
 					{
 						this->animFrame = this->currentAnimation->frameInicial;
-						this->animationState = AnimationState::STOPPED;
+						this->animationState = STOPPED;
 					}
 				}
 			}
@@ -599,7 +604,7 @@ bool Object::isLooping()
 	return dbObjectLooping(this->id);
 }
 //--
-bool Object::isExists()
+bool Object::exists()
 {
 	if (!this->id) return false;
 	else return dbObjectExist(this->id);

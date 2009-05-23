@@ -15,8 +15,8 @@ Camera::Camera()
 {
 	this->setId(Game::getCameraId());
 	dbMakeCamera(this->id);
-	this->setFov(45);
-	this->setClips(1, 3000);
+	this->setFov(45.0f);
+	this->setClips(1.0f, 3000.0f);
 }
 //--
 

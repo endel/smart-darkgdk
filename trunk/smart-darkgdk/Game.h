@@ -53,7 +53,8 @@ using namespace std;
 //game
 class Game
 {
-private:
+public:
+	//public vars
 	static int OBJECT_ID;
 	static int SPRITE_ID;
 	static int IMAGE_ID;
@@ -71,10 +72,9 @@ private:
 	static int PARTICLES_ID;
 
 	static MouseClickState MOUSE_STATE;
-public:
-	//public vars
 	static MouseClick LAST_MOUSE_CLICK;
 	static MouseClick MOUSE_CLICK;
+
 
 	//public methods
 	Game(void);
