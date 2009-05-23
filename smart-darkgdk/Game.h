@@ -28,6 +28,7 @@
 #include "include/Lives.h"
 
 //static classes
+#include "include/BSP.h"
 #include "include/Key.h"
 #include "include/String.h"
 #include "include/Mouse.h"

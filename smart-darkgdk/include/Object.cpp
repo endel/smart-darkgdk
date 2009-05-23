@@ -57,6 +57,7 @@ Object::Object(float width,float height,float depth)
 Object::Object(ObjectType t, float size)
 {
 	this->setId(Game::getObjectId());
+
 	switch (t)
 	{
 		case CONE: dbMakeObjectCone(this->id,size);break;
@@ -66,6 +67,7 @@ Object::Object(ObjectType t, float size)
 	}
 	allowAnimation();
 }
+
 //--
 
 Object::Object(Object* second, Limb *l)
@@ -95,6 +97,12 @@ Object::Object(float x1, float y1, float z1, float x2, float y2, float z2, float
 Object::~Object(void)
 {
 	dbDeleteObject(this->id);
+}
+//--
+
+char* Object::getClassName()
+{
+	return "Object";
 }
 //--
 

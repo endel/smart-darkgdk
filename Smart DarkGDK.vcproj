@@ -171,6 +171,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\smart-darkgdk\include\CommonBSPCollider.h"
+						>
+					</File>
+					<File
 						RelativePath=".\smart-darkgdk\include\CommonObject.h"
 						>
 					</File>
@@ -244,6 +248,10 @@
 					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Camera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\CommonBSPCollider.cpp"
 						>
 					</File>
 					<File
@@ -331,6 +339,10 @@
 					Name="cpp"
 					>
 					<File
+						RelativePath=".\smart-darkgdk\include\BSP.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\smart-darkgdk\include\Fog.cpp"
 						>
 					</File>
@@ -370,6 +382,10 @@
 				<Filter
 					Name="headers"
 					>
+					<File
+						RelativePath=".\smart-darkgdk\include\BSP.h"
+						>
+					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Fog.h"
 						>
@@ -415,6 +431,14 @@
 					Name="cpp"
 					>
 					<File
+						RelativePath=".\smart-darkgdk\include\Event.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\EventDispatcher.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\smart-darkgdk\include\Lives.cpp"
 						>
 					</File>
@@ -426,6 +450,14 @@
 				<Filter
 					Name="headers"
 					>
+					<File
+						RelativePath=".\smart-darkgdk\include\Event.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\EventDispatcher.h"
+						>
+					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Lives.h"
 						>

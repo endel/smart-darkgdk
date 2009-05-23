@@ -1,5 +1,5 @@
 #pragma once
-#include "Commonobject.h"
+#include "CommonBSPCollider.h"
 #include "Image.h"
 #include "ObjectType.h"
 
@@ -7,7 +7,7 @@ class Texture;
 class Object;
 
 class Camera :
-	public CommonObject
+	public CommonBSPCollider
 {
 public:
 	//------------------->CONSTRUCTORS / DESTRUCTORS<-------------------
@@ -15,7 +15,7 @@ public:
 	Camera(int n);
 	Camera(int fov, int nearClip, int farClip);
 	~Camera(void);
-
+	char* getClassName();
 
 
 
