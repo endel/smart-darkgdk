@@ -12,7 +12,6 @@ PlaneFight::~PlaneFight(void)
 
 void PlaneFight::start()
 {
-	MainMenu menu;
 	menu.start();
 }
 

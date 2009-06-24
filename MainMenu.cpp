@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "PlaneFightDefs.h"
 
 MainMenu::MainMenu(void)
 {
@@ -30,7 +31,7 @@ void MainMenu::setSelected(MainMenuItem s)
 {
 	selected = s;
 }
-MainMenuItem MainMenu::itemSelected()
+MainMenuItem MainMenu::getItemSelected()
 {
 	return selected;
 }
