@@ -12,18 +12,17 @@ class VertexShader;
 class PixelShader;
 class Effect;
 class Limb;
+class Event;
+class Listener;
 
 class Object : 
-	public CommonBSPCollider
+	public CommonBSPCollider, public Listener
 {
 public:
 	//---------------------->OPERATOR OVERLOADING<----------------------
 	bool operator==(Object* o);
 
-
-
-
-
+	void execute(Event *);
 	//------------------->CONSTRUCTORS / DESTRUCTORS<-------------------
 	Object(int id);
 	Object(char* filename);
