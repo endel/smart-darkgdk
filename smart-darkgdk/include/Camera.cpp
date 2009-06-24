@@ -104,26 +104,44 @@ void Camera::position(float x,float y, float z)
 	dbPositionCamera(this->id,x,y,z);
 }
 //--
+void Camera::position(Object *o)
+{
+	dbPositionCamera(this->id,o->getPositionX(),o->getPositionY(),o->getPositionZ());
+}
 
 void Camera::lookAt(float x,float y, float z)
+{
+	this->point(x,y,z);
+}
+void Camera::point(float x,float y, float z)
 {
 	dbPointCamera(this->id,x,y,z);
 }
 //--
 
-void Camera::rotation(float angleX,float angleY,float angleZ)
+void Camera::setRotation(float angleX,float angleY,float angleZ)
 {
 	dbRotateCamera(this->id,angleX,angleY,angleZ);
 }
 //--
 
+void Camera::setRotation(Object *o)
+{
+	dbRotateCamera(this->id,o->getAngleX(),o->getAngleY(),o->getAngleZ());
+}
+
 void Camera::rotate(float angleX,float angleY,float angleZ)
 {
-	if(angleY > 0)	dbTurnCameraLeft(this->id, angleY);
-	if(angleY < 0)  dbTurnCameraRight(this->id, angleY);
+	dbRotateCamera(this->id,this->getAngleX()+angleX,this->getAngleY()+angleY,this->getAngleZ()+angleZ);
 }
 //--
 
+void Camera::turn(float q)
+{
+	if(q > 0) dbTurnCameraLeft(this->id, q);
+	if(q < 0) dbTurnCameraRight(this->id, q);
+}
+//--
 
 void Camera::follow3DPerson(Object* objeto, float distance, float height, float alturaVisao)
 {
@@ -139,21 +157,6 @@ void Camera::controlUsingArrowKeys(float velocity,float turnSpeed)
 	dbControlCameraUsingArrowKeys(this->id,velocity,turnSpeed);
 }
 //--
-
-void Camera::follow3DPersonTrabalho(Object* objeto, float distance, float height, float alturaVisao, float deltaMouse) //-->DELETAR
-{
-	this->position(objeto->getPositionX(), objeto->getPositionY(), objeto->getPositionZ()),
-	this->setToObjectOrientation(objeto);
-	this->rotate(0, deltaMouse, 0);
-	this->localMove(0, height, -distance);
-	this->lookAt(objeto->getPositionX(), alturaVisao, objeto->getPositionZ());
-}
-
-
-
-
-
-
 
 void Camera::setView(float left,float top,float right,float bottom)
 {

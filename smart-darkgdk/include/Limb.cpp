@@ -70,6 +70,10 @@ void Limb::scale( float fX, float fY, float fZ, int iBoundFlag )
 		dbScaleLimb( topObj->id, this->id, fX, fY, fZ );
 	}
 }
+void Limb::scale( float fXYZ )
+{
+	dbScaleLimb( topObj->id, this->id, fXYZ, fXYZ, fXYZ );
+}
 void Limb::link( Object *o )
 {
 	dbLinkLimb( topObj->id, o->id, this->id );

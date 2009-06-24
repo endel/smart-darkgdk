@@ -16,6 +16,7 @@ int Game::EFFECT_ID = 0;
 int Game::MUSIC_ID = 0;
 int Game::SOUND_ID = 0;
 int Game::PARTICLES_ID = 0;
+int Game::TERRAIN_ID = 0;
 
 int Game::CAMERA_ID = -1;
 
@@ -92,6 +93,10 @@ int Game::getParticlesId()
 {
 	return ++PARTICLES_ID;
 }
+int Game::getTerrainId()
+{
+	return ++TERRAIN_ID;
+}
 
 int Game::width()
 {
@@ -117,7 +122,6 @@ void Game::refresh()
 {
 	MOUSE_CLICK = (MouseClick) dbMouseClick();
 	
-
 	if (MOUSE_CLICK != LAST_MOUSE_CLICK && MOUSE_STATE != MOUSE_PRESSING) 
 	{
 		MOUSE_STATE = MOUSE_PRESS;

@@ -49,15 +49,21 @@ public:
 
 	//-->PosicionaCamera
 	void position(float x,float y, float z);
+	void position(Object *o);
 
 	//-->Aponta para cordenadas
 	void lookAt(float x,float y, float z);
+	void point(float x, float y, float z);
 
 	//-->Rotaciona tantos graus
 	void rotate(float angleX,float angleY,float angleZ);
 
 	//-->Rotaciona tantos graus
-	void rotation(float angleX,float angleY,float angleZ);
+	void setRotation(float angleX,float angleY,float angleZ);
+	void setRotation(Object *o);
+
+	//-->Rotaciona no eixo Y
+	void turn(float q);
 
 	//-->Follow Object 3D Person
 	void follow3DPerson(Object* objeto, float distance, float height, float alturaVisao);
@@ -68,19 +74,13 @@ public:
 	//-->Seta a orientacao igual ao objeto
 	void setToObjectOrientation(Object *o);
 
-	//-->DELETAR
-	void follow3DPersonTrabalho(Object* objeto, float distance, float height, float alturaVisao, float deltaMouse);
-
-
+	
 
 	void setView(float left,float top,float right,float bottom);
 	void setToFollow(float x,float y,float z,float angle,float distance, float height,float smooth, int collision);
 	void setToFollow(Object* o,ANGLE a,float distance, float height,float smooth, int collision);
 	void setToImage(Image *t,int width,int height);
 	void setToImage(Image *t,int width,int height,int genAlpha);
-
-
-
 
 
 	//------------------->GETTERS<-------------------

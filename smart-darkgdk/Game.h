@@ -23,6 +23,8 @@
 #include "include/Sound.h"
 #include "include/Particles.h"
 #include "include/Sprite.h"
+#include "include/Terrain.h"
+
 
 //smart classes
 #include "include/Lives.h"
@@ -70,6 +72,7 @@ public:
 	static int MUSIC_ID;
 	static int SOUND_ID;
 	static int PARTICLES_ID;
+	static int TERRAIN_ID;
 
 	static MouseClickState MOUSE_STATE;
 	static MouseClick LAST_MOUSE_CLICK;
@@ -93,6 +96,7 @@ public:
 	static int getMusicId();
 	static int getSoundId();
 	static int getParticlesId();
+	static int getTerrainId();
 
 	static MouseClick getLastMouseClick();
 

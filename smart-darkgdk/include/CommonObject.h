@@ -1,5 +1,6 @@
 #pragma once
 #include "EventDispatcher.h"
+#include "Listener.h"
 
 class CommonObject 
 	: public EventDispatcher

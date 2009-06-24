@@ -9,7 +9,7 @@
 #include "PixelShader.h"
 #include "Effect.h"
 #include "BSP.h"
-
+#include "Event.h"
 
 //------------------------------------------------
 //			  OPERATOR OVERLOADING
@@ -67,6 +67,11 @@ Object::Object(ObjectType t, float size)
 		case SPHERE: dbMakeObjectSphere(this->id,size);break;
 	}
 	_init();
+}
+
+void Object::execute(Event *e)
+{
+	position(999,999,999);
 }
 
 //--

@@ -156,6 +156,14 @@
 				RelativePath=".\smart-darkgdk\Game.h"
 				>
 			</File>
+			<File
+				RelativePath=".\smart-darkgdk\include\Listener.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\smart-darkgdk\include\Listener.h"
+				>
+			</File>
 			<Filter
 				Name="darkgdk"
 				>
@@ -232,6 +240,10 @@
 					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Sprite.h"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Terrain.h"
 						>
 					</File>
 					<File
@@ -312,6 +324,10 @@
 					</File>
 					<File
 						RelativePath=".\smart-darkgdk\include\Sprite.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\smart-darkgdk\include\Terrain.cpp"
 						>
 					</File>
 					<File
@@ -480,11 +496,31 @@
 				RelativePath=".\ReadMe.txt"
 				>
 			</File>
-			<Filter
-				Name="Scenes"
+			<File
+				RelativePath=".\sample_game01.cpp"
 				>
-			</Filter>
+			</File>
 		</Filter>
+		<File
+			RelativePath=".\MainMenu.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\MainMenu.h"
+			>
+		</File>
+		<File
+			RelativePath=".\PlaneFight.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\PlaneFight.h"
+			>
+		</File>
+		<File
+			RelativePath=".\PlaneFightDefs.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

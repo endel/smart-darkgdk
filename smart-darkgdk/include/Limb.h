@@ -12,16 +12,13 @@ public:
 	~Limb(void);
 
 	void glueObject(Object* o, int mode=NULL);
-	
-	void offset();
-	void rotate();
-	void scale();
 
 	void hide();
 	void show();
 	void offset( float fX, float fY, float fZ, int iBoundFlag=NULL );
 	void rotate( float fX, float fY, float fZ, int iBoundFlag=NULL );
 	void scale( float fX, float fY, float fZ, int iBoundFlag=NULL );
+	void scale( float fXYZ );
 	void link( Object *o );
 	void texture( Image *img );
 	void texture( int iStage, Image *img );
