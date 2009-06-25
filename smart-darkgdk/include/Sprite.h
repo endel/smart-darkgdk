@@ -6,9 +6,6 @@ class Sprite :
 	public CommonObject
 {
 public:
-	Sprite & operator=(const Sprite *s);
-
-
 
 	//-->CONSTRUCTORS / DESTRUCTORS
 	Sprite(void);

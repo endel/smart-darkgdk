@@ -9,10 +9,10 @@ private:
 	MainMenuItem selected;
 	
 	Sprite *background;
-	Sprite *iStart, iStart2;
-	Sprite *iRecords, iRecords2;
-	Sprite *iCredits, iCredits2;
-	Sprite *iQuit, iQuit2;
+	Sprite *iStart, *iStart2;
+	Sprite *iRecords, *iRecords2;
+	Sprite *iCredits, *iCredits2;
+	Sprite *iQuit, *iQuit2;
 public:
 	MainMenu(void);
 	~MainMenu(void);

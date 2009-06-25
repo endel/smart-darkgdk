@@ -4,15 +4,6 @@
 #include "Sprite.h"
 #include "DarkGDK.h"
 
-Sprite& Sprite::operator=(const Sprite *s) {
-	setId(s->id);
-	return *this;
-}
-
-
-Sprite::Sprite()
-{
-}
 
 Sprite::Sprite(char* filename, int x, int y)
 {
