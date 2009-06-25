@@ -22,7 +22,7 @@ void PlaneFight::start()
 	loading->position( (width/2)-(loading->getWidth()/2), (height/2)-(loading->getHeight()/2) );
 
 	//carrega todos os modelos
-
+	
 
 	//fim dos carregamentos
 	Game::setBackdropColor(0,0,0);

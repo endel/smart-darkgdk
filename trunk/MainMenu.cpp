@@ -39,7 +39,7 @@ void MainMenu::start()
 
 bool MainMenu::active()
 {
-	
+	if ()
 
 	//loop de ação para o menu (tudo acontecer...)
 	return true;//no final, retorna se ainda está no menu ou não
