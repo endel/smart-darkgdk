@@ -10,6 +10,7 @@
 #include "Effect.h"
 #include "BSP.h"
 #include "Event.h"
+#include <map>
 
 //------------------------------------------------
 //			  OPERATOR OVERLOADING
@@ -18,6 +19,11 @@
 bool Object::operator==(Object* o)
 {
 	return (this->id == o->id);
+}
+
+bool Object::operator!=(Object* o)
+{
+	return (this->id != o->id);
 }
 
 //------------------------------------------------
@@ -438,6 +444,16 @@ void Object::lookAt(float x, float y, float z)
 	dbPointObject(this->id, x, y, z);
 }
 //--
+
+void Object::setVar(char* name, int value)
+{
+	vars[name] = value;
+}
+
+int Object::getVar(char* name)
+{
+	return vars[name];
+}
 
 
 

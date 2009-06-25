@@ -21,6 +21,7 @@ class Object :
 public:
 	//---------------------->OPERATOR OVERLOADING<----------------------
 	bool operator==(Object* o);
+	bool operator!=(Object* o);
 
 	void execute(Event *);
 	//------------------->CONSTRUCTORS / DESTRUCTORS<-------------------
@@ -112,6 +113,8 @@ public:
 	void lookAt(float x, float y, float z);
 
 
+	void setVar(char* name, int value);
+	int getVar(char* name);
 
 
 
@@ -247,5 +250,6 @@ private:
 	AnimationClip* currentAnimation;
 	AnimationState animationState;
 	
+	map<char*, int> vars;
 	map<char*, AnimationClip*> animations;
 };

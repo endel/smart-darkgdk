@@ -2,6 +2,8 @@
 
 #include "MainMenu.h"
 
+class LifeObject;
+
 class PlaneFight
 {
 private:
@@ -16,6 +18,8 @@ private:
 	int LARGURA_CENARIO;
 	
 	int score;
+
+	bool exploding;
 
 	//Airplane control
 	float	acceleration,
@@ -37,9 +41,12 @@ private:
 
 	float	cameraSmooth;
 
-	vector<Object*> addPoints;
+	float	initY;
+
+	vector<Object*> bullets;
 	vector<Object*> enemies;
-	Object *baseEnemy;
+	Object	*baseEnemy,
+			*baseBullet;
 	int new_enemy_interval,
 		new_enemy_count;
 
@@ -66,4 +73,7 @@ public:
 	void startGame();
 	void gameLoop();
 	void createEnemy();
+	void createBullet();
+
+	void explodePlayer();
 };
