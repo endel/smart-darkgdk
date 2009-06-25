@@ -4,20 +4,22 @@
 #include "Sprite.h"
 #include "DarkGDK.h"
 
-Sprite::Sprite(Image* p_image)
-{
-	this->setId(Game::getSpriteId());
-	dbSprite(this->id, 0, 0, p_image->id);
-
-	resetTextureOffset();
+Sprite& Sprite::operator=(const Sprite *s) {
+	setId(s->id);
+	return *this;
 }
-//--
-Sprite::Sprite(char* filename)
+
+
+Sprite::Sprite()
+{
+}
+
+Sprite::Sprite(char* filename, int x, int y)
 {
 	this->setId(Game::getSpriteId());
 	
 	Image* img = new Image(filename);
-	dbSprite(this->id, 0, 0, img->id);
+	dbSprite(this->id, x, y, img->id);
 
 	resetTextureOffset();
 }
@@ -65,6 +67,18 @@ void Sprite::resetTextureOffset()
 	this->offsetTextureU = 0;
 	this->offsetTextureV = 0;
 }
+
+
+void Sprite::load(char* filename, int x, int y)
+{
+	this->setId(Game::getSpriteId());
+	
+	Image* img = new Image(filename);
+	dbSprite(this->id, x, y, img->id);
+
+	resetTextureOffset();
+}
+
 
 //------------------------------------------------
 //					TRANSFORM

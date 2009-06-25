@@ -6,14 +6,20 @@ class Sprite :
 	public CommonObject
 {
 public:
+	Sprite & operator=(const Sprite *s);
+
+
+
 	//-->CONSTRUCTORS / DESTRUCTORS
-	Sprite(char* filename);
-	Sprite(Image* p_image);
+	Sprite(void);
+	Sprite(char* filename, int x=0, int y=0);
 	Sprite(char* filename, char* animation_name, int p_framesAcross, int p_framesDown);
 	Sprite(int p_x, int p_y, Image* p_image);
 	Sprite(int p_x, int p_y, Image* p_image, int p_framesAcross, int p_framesDown, char* name);
 	~Sprite();
 	void resetTextureOffset();
+
+	void load(char* filename, int x=0, int y=0);
 
 	
 	//-->TRANFORM
