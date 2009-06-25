@@ -20,6 +20,7 @@ private:
 public:
 	MainMenu(void);
 	~MainMenu(void);
+	void load();
 	void start();
 	bool active();
 	void end();
