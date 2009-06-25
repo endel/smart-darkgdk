@@ -18,7 +18,7 @@ void PlaneFight::start()
 
 	Game::init("Plane Fight",width,height);
 	Game::setDir("Media/");
-
+	
 	Game::setBackdropColor(255,255,255);
 
 	Sprite *loading = new Sprite("PlaneFight/loading.png");
@@ -43,10 +43,11 @@ void PlaneFight::start()
 void PlaneFight::loadGame()
 {
 	gameRunning = false;
+	exploding = false;
 
 	//init vars
-	PROFUNDIDADE_CENARIO = 25000;
-	LARGURA_CENARIO = 800;
+	PROFUNDIDADE_CENARIO = 35000;
+	LARGURA_CENARIO = 900;
 
 	score = 0;
 
@@ -69,7 +70,8 @@ void PlaneFight::loadGame()
 	maxRotation				= 1;
 
 	cameraSmooth	= 10;
-
+	
+	initY = 120.0;
 
 	//load contents
 	Game::setDir("Media/");
@@ -79,10 +81,15 @@ void PlaneFight::loadGame()
 	
 	jogador = new Object(CUBE, 1);
 	jogadorSprite = new Object("models/aviao.x");
-	baseEnemy = new Object("models/Fokker/Fokker.X");
+	baseEnemy = new Object("models/Fokker/Fokker2.X");
+	baseEnemy->scale(7);
+
+	baseBullet = new Object(ObjectType::SPHERE, 0.5);
+	baseBullet->setColor(0,0,0);
+
 	jogadorSprite->addAnimation("Voaaa",0,101,10,LOOP);
 
-	lives = new Lives( "icons/live.png", 3 );
+	lives = new Lives( "icons/live.png", 3 );5
 	hideGameObjs();
 }
 
@@ -94,6 +101,7 @@ void PlaneFight::hideGameObjs()
 	jogadorSprite->hide();
 	lives->hide();
 	baseEnemy->hide();
+	baseBullet->hide();
 }
 
 void PlaneFight::startGame()
@@ -105,13 +113,13 @@ void PlaneFight::startGame()
 	
 	Fog::enable( 255, 255, 255, 2500 );
 
-	new_enemy_interval = 200;
+	new_enemy_interval = 300;
 	new_enemy_count = 0;
 	
 	//game sounds
 	jogadorSprite->scale(5);
 	jogadorSprite->fixPivot();
-	jogador->setPosition( LARGURA_CENARIO/2 , 120, 50 );
+	jogador->setPosition( LARGURA_CENARIO/2 , initY, 50 );
 	jogadorSprite->setPosition( jogador );
 
 	camera = new Camera();
@@ -156,49 +164,18 @@ bool PlaneFight::loop()
 
 void PlaneFight::gameLoop()
 {
-
-	//create player
-	
-	//jogador->rotateY(180);
-	
-	/*jogador->playAnimation("Voaaa");
-	jogador->isLooping();*/
-
-	//Objetos
-	/*for (int i=0;i<80;i++)
-	{
-		temp = new Object(SPHERE, 10);
-		temp->position(
-			random(cenario->getWidth()-temp->getSizeX()),
-			5 + random(20), 
-			random(cenario->getDepth())
-		);
-		addPoints.push_back(temp);
-	}*/
-
-
 	//Draw score
 	String::draw(10,36,"Score: ");
 	String::draw(66,36,score);
-
-	/*
-	Mouse::setPosition(400, 300);
-	Mouse::hide();
 	
-	if ( Key::check(KEY_W) )
+	if (Key::check(KEY_SPACE))
 	{
-		if (speed < maxSpeed)
-			speed += acceleration;
+		if (bullets.size() < 50)
+		{
+			createBullet();
+		}
 	}
 
-		if (jogador->getPositionY() < 40)
-		jogador->positionY((float)Mouse::moveY()/300);
-
-	String::draw(200,50,(float)Mouse::moveY()/30);
-	*/
-
-
-	
 	//up key
 	if ( Key::check(KEY_W) )
 	{
@@ -230,8 +207,10 @@ void PlaneFight::gameLoop()
 	if (Key::check(KEY_A) || Key::check(KEY_D))
 	{
 		jogadorSprite->rotateZ( rotation );
+
 	} else {
-	//no rotation --> reset rotation to zero
+
+		//no rotation --> reset rotation to zero
 		if (jogadorSprite->getAngleZ() > rotationReturning)
 		{
 			jogadorSprite->rotateZ( -rotationReturning );
@@ -245,14 +224,6 @@ void PlaneFight::gameLoop()
 	if ( speed >= bonusSpeed )
 		speed -= friction;
 
-	//let airplane to fly...
-	/*if ( speed > maxSpeed-acceleration )
-	{
-		if ( jogador->getPositionY() < 200 )
-			if ( gravitySpeed < maxGravity )
-				gravitySpeed += flyAcceleration;
-	}*/
-	
 	//player allways try to move
 	jogador->move( speed );
 	jogador->positionY(gravitySpeed);
@@ -267,80 +238,103 @@ void PlaneFight::gameLoop()
 		rotation += rotationFriction;
 	}
 
-	/*//gravitation
-	if ( jogador->getPositionY() > 1 )
-	{
-		if ( speed > maxSpeed-acceleration )
-		{
-			if ( gravitySpeed > gravity )
-				gravitySpeed -= gravity;
-		} else
-		{
-			gravitySpeed -= gravity;
-		}
-	} else 
-	{
-		gravitySpeed = 0;
-	}*/
-
-	//collision detection
-	/*vector<Object*>::iterator it = addPoints.begin();
-	while (it != addPoints.end())
-	{
-		Object* obj1 = (*it);
-		Object* obj2 = obj1->collision();
-		it++;
-		// se colidiu com o jogador
-		if (obj2->id == jogador->id)
-		{
-			score++;
-			delete obj1;
-		}
-	}*/
-	
-
-	/*float fix_dist_from_player = (cenario->getPositionZ() + (PROFUNDIDADE_CENARIO / 2)) + jogadorSprite->getSizeZ();
-	if ( jogador->getPositionZ() > fix_dist_from_player ) {
-		cenario->setPositionZ( jogador->getPositionZ() - (PROFUNDIDADE_CENARIO / 2) );
-	}*/
-	
-
 	if (new_enemy_count > new_enemy_interval)
 	{
 		new_enemy_count = 0;
-		//createEnemy();
-		//criar inimigo
-
+		createEnemy();
 	}
 	new_enemy_count++;
 
-	vector<Object*>::iterator it;
-	it = enemies.begin();
+	vector<Object*>::iterator it = enemies.begin();
 	while (it != enemies.end())
 	{
+		bool inc_it = true;
 		Object* enemy = (*it);
-		enemy->move(-0.1);
-		if (enemy->getPositionZ() < jogador->getPositionZ() - 100)
+		if (enemy->exists())
 		{
-			delete enemy;
+			if (enemy->collision(jogador))
+			{
+				explodePlayer();
+			}
+			
+			if (enemy->getPositionZ() < jogador->getPositionZ() - 100)
+			{
+				it = enemies.erase(it);
+				delete enemy;
+				inc_it = false;
+			}
 		}
+		if (inc_it)
+			it++;
+	}
+	
+	vector<Object*>::iterator it_bullets = bullets.begin();
+	while (it_bullets != bullets.end())
+	{
+		bool inc_it = true;
+		bool deleteEnemy = false;
+		
+		Object* bullet = (*it_bullets);
+
+		if (bullet->exists())
+		{
+			bullet->move(20);
+
+			Object *bullet_collision = bullet->collision();
+			
+			/*if (bullet_collision->exists() && (bullet_collision->id != jogador->id))
+			{
+				bullet_collision->setVar("life", bullet_collision->getVar("life") - 1 );
+				deleteEnemy = (bullet_collision->getVar("life") <= 0);
+			}*/
+
+			if ((bullet->getPositionZ() > jogador->getPositionZ() + 1000) || deleteEnemy)
+			{
+				it_bullets = bullets.erase(it_bullets);
+				delete bullet;
+				inc_it = false;
+			}
+
+		}
+		if (inc_it)
+			it_bullets++;
+
 	}
 
 	skysphere->setPosition( jogador );
 	jogadorSprite->setPosition( jogador );
-	camera->setToFollow( jogador, ANGLE_Y, 40, 10, cameraSmooth, 1 );
-
+	camera->follow3DPerson(jogador, 100, 30, 130);
 }
 
 void PlaneFight::createEnemy()
 {
-	//Object* newEnemy = baseEnemy->clone();
-	Object* newEnemy = new Object("models/Fokker/Fokker.X");
-
-	newEnemy->position(
-		100+random(LARGURA_CENARIO-200), 
-		100+random(40), 
-		jogador->getPositionZ() + 500 + random(100) 
+	Object* newEnemy = baseEnemy->clone();
+	newEnemy->setVar("life",5);
+	newEnemy->setPosition(
+		100 + random(LARGURA_CENARIO-200), 
+		initY, 
+		jogador->getPositionZ() + 1800 + random(100) 
 	);
+
+	newEnemy->show();
+
 	enemies.push_back(newEnemy);
+}
+
+void PlaneFight::createBullet()
+{
+	Object* newBullet = baseBullet->clone();
+	
+	newBullet->setPosition(jogador);
+	newBullet->show();
+	
+	bullets.push_back(newBullet);
+}
+
+void PlaneFight::explodePlayer()
+{
+	if (!exploding)
+	{
+		exploding = true;
+	}
 }
