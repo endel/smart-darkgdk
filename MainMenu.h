@@ -6,9 +6,13 @@ enum MainMenuItem;
 class MainMenu
 {
 private:
+	bool looping;
+
 	MainMenuItem selected;
-	
 	Sprite *background;
+	
+	Sprite *cursor, *cursorSprite;
+
 	Sprite *iStart, *iStart2;
 	Sprite *iRecords, *iRecords2;
 	Sprite *iCredits, *iCredits2;

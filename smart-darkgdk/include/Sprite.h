@@ -9,6 +9,7 @@ public:
 
 	//-->CONSTRUCTORS / DESTRUCTORS
 	Sprite(void);
+	Sprite(int n);
 	Sprite(char* filename, int x=0, int y=0);
 	Sprite(char* filename, char* animation_name, int p_framesAcross, int p_framesDown);
 	Sprite(int p_x, int p_y, Image* p_image);
@@ -51,6 +52,13 @@ public:
 	int getColorR();
 	int getColorG();
 	int getColorB();
+	bool exists();
+
+	Sprite* hit();
+	Sprite* collision();
+
+	bool hit(Sprite *s);
+	bool collision(Sprite *s);
 
 
 	//-->VARIABLES

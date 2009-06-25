@@ -14,6 +14,12 @@ Sprite::Sprite(char* filename, int x, int y)
 
 	resetTextureOffset();
 }
+
+Sprite::Sprite(int n)
+{
+	setId(n);
+}
+
 //--
 Sprite::Sprite(int p_x, int p_y, Image* p_image)
 {
@@ -185,11 +191,34 @@ Sprite::toggle()
 
 
 
-
-
 //------------------------------------------------
 //					GETTERS
 //------------------------------------------------
+
+
+Sprite* Sprite::hit()
+{
+	return new Sprite( dbSpriteHit(this->id, 0) );
+}
+Sprite* Sprite::collision()
+{
+	return new Sprite( dbSpriteCollision(this->id, 0) );
+}
+
+bool Sprite::hit(Sprite *s)
+{
+	return (bool) dbSpriteHit(this->id, s->id);
+}
+bool Sprite::collision(Sprite *s)
+{
+	return (bool) dbSpriteCollision(this->id, s->id);
+}
+
+
+bool Sprite::exists()
+{
+	return dbSpriteExist(this->id);
+}
 
 int
 Sprite::getPositionX()
