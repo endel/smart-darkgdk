@@ -308,11 +308,12 @@ void PlaneFight::gameLoop()
 	if (new_enemy_count > new_enemy_interval)
 	{
 		new_enemy_count = 0;
-
+		//createEnemy();
 		//criar inimigo
 
 	}
-	
+	new_enemy_count++;
+
 	vector<Object*>::iterator it;
 	it = enemies.begin();
 	while (it != enemies.end())
