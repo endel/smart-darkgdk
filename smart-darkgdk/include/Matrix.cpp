@@ -32,10 +32,24 @@ Image* Matrix::prepareTexture(char* imagePath,int across,int down)
 	this->prepareTexture(t,across,down);
 	return t;
 }
-void Matrix::position(float x,float y,float z)
+
+void Matrix::setPosition(float x,float y,float z)
 {
 	dbPositionMatrix(this->id,x,y,z);
 }
+void Matrix::setPositionX(float n)
+{
+	dbPositionMatrix(this->id, n, getPositionY(), getPositionZ());
+}
+void Matrix::setPositionY(float n)
+{
+	dbPositionMatrix(this->id,getPositionX(), n, getPositionZ());
+}
+void Matrix::setPositionZ(float n)
+{
+	dbPositionMatrix(this->id, getPositionX(), getPositionY(), n);
+}
+
 void Matrix::fill(float height,int tileNumber)
 {
 	dbFillMatrix(this->id,height,tileNumber);
@@ -100,15 +114,15 @@ void Matrix::update()
 	return dbUpdateMatrix(this->id);
 }
 
-float Matrix::positionX()
+float Matrix::getPositionX()
 {
 	return dbMatrixPositionX(this->id);
 }
-float Matrix::positionY()
+float Matrix::getPositionY()
 {
 	return dbMatrixPositionY(this->id);
 }
-float Matrix::positionZ()
+float Matrix::getPositionZ()
 {
 	return dbMatrixPositionZ(this->id);
 }

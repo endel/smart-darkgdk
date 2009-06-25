@@ -15,7 +15,10 @@ public:
 
 	void prepareTexture(Image *t,int across=1,int down=1);
 	Image* prepareTexture(char* imagePath,int across=1,int down=1);
-	void position(float x,float y,float z);
+	void setPosition(float x,float y,float z);
+	void setPositionX(float n);
+	void setPositionY(float n);
+	void setPositionZ(float n);
 	void fill(float height,int tileNumber);
 	void randomize(int maxHeight);
 	
@@ -36,9 +39,9 @@ public:
 	void setTile(int tileX,int tileZ,int tileNumber);
 	void update();
 
-	float positionX();
-	float positionY();
-	float positionZ();
+	float getPositionX();
+	float getPositionY();
+	float getPositionZ();
 	int tileCount();
 	bool tilesExist();
 	int wireframeState();

@@ -22,6 +22,7 @@ private:
 			friction,
 			speed,
 			maxSpeed,
+			bonusSpeed,
 
 			gravity,
 			flyAcceleration,
@@ -37,17 +38,22 @@ private:
 	float	cameraSmooth;
 
 	vector<Object*> addPoints;
+	vector<Object*> enemies;
+	Object *baseEnemy;
+	int new_enemy_interval,
+		new_enemy_count;
 
-	Matrix *cenario;
-	Music *backgroundMusic;
-	Object *parede;
-	Object *skysphere;
-	Object *jogador;
-	Object *temp;
-	Camera* camera;
-	Lives *lives;
-	Object* obj1;
-	Object* obj2;
+	Matrix	*cenario;
+	Music	*backgroundMusic;
+	Object	*parede;
+	Object	*skysphere;
+	Object	*jogador,
+			*jogadorSprite;
+	Object	*temp;
+	Camera	*camera;
+	Lives	*lives;
+	Object	*obj1;
+	Object	*obj2;
 public:
 	PlaneFight(void);
 	~PlaneFight(void);
@@ -59,4 +65,5 @@ public:
 	void hideGameObjs();
 	void startGame();
 	void gameLoop();
+	void createEnemy();
 };

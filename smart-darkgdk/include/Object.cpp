@@ -112,6 +112,14 @@ char* Object::getClassName()
 }
 //--
 
+Object* Object::clone()
+{
+	Object* cloned = new Object(Game::getObjectId());
+	dbCloneObject(cloned->id,this->id);
+	return cloned;
+
+}
+
 void Object::_init()
 {
 	if (BSP::getAllCollisionsEnabled()) {
