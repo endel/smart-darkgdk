@@ -312,6 +312,18 @@ void PlaneFight::gameLoop()
 		//criar inimigo
 
 	}
+	
+	vector<Object*>::iterator it;
+	it = enemies.begin();
+	while (it != enemies.end())
+	{
+		Object* enemy = (*it);
+		enemy->move(-0.1);
+		if (enemy->getPositionZ() < jogador->getPositionZ() - 100)
+		{
+			delete enemy;
+		}
+	}
 
 	skysphere->setPosition( jogador );
 	jogadorSprite->setPosition( jogador );
@@ -324,9 +336,9 @@ void PlaneFight::createEnemy()
 	Object* newEnemy = baseEnemy->clone();
 	newEnemy->show();
 	newEnemy->position(
-		random(LARGURA_CENARIO), 
+		100+random(LARGURA_CENARIO-200), 
 		100+random(40), 
-		jogador->getPositionZ() + 200 + random(100) 
+		jogador->getPositionZ() + 500 + random(100) 
 	);
 	enemies.push_back(newEnemy);
 }

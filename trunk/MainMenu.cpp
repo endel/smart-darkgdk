@@ -15,7 +15,7 @@ MainMenu::~MainMenu(void)
 
 void MainMenu::load()
 {
-	background = new Sprite("PlaneFight/MainMenu.jpg");
+	background = new Sprite("PlaneFight/background.png");
 
 	int menu_pos_x = 555;
 	int menu_pos_y = 300;
