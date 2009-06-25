@@ -5,6 +5,7 @@
 class PlaneFight
 {
 private:
+	int width, height;
 	MainMenu menu;
 public:
 	PlaneFight(void);

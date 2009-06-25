@@ -496,10 +496,6 @@
 				RelativePath=".\ReadMe.txt"
 				>
 			</File>
-			<File
-				RelativePath=".\sample_game01.cpp"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath=".\MainMenu.cpp"
