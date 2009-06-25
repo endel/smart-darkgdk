@@ -32,6 +32,8 @@ void Game::init(char* title,int w,int h,int syncRate)
 	dbSyncRate( syncRate );
 	dbRandomize ( dbTimer ( ) );
 
+	dbSetImageColorKey (127,127,127);
+
 	Game::setResolution(w,h);
 }
 void Game::setResolution(int w,int h) {
