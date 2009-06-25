@@ -333,8 +333,9 @@ void PlaneFight::gameLoop()
 
 void PlaneFight::createEnemy()
 {
-	Object* newEnemy = baseEnemy->clone();
-	newEnemy->show();
+	//Object* newEnemy = baseEnemy->clone();
+	Object* newEnemy = new Object("models/Fokker/Fokker.X");
+
 	newEnemy->position(
 		100+random(LARGURA_CENARIO-200), 
 		100+random(40), 
