@@ -15,7 +15,7 @@ void PlaneFight::start()
 	width = 800;
 	height = 600;
 
-	Game::init("Plane Fight",width,width);
+	Game::init("Plane Fight",width,height);
 	Game::setDir("Media/PlaneFight/");
 	Game::setBackdropColor(255,255,255);
 	Sprite *loading = new Sprite("loading.png");
