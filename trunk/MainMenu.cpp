@@ -13,38 +13,57 @@ MainMenu::~MainMenu(void)
 {
 }
 
-void MainMenu::start()
+void MainMenu::load()
 {
-	looping = true;
-	background = new Sprite("MainMenu.jpg");
-	
-	Mouse::hide();
+	background = new Sprite("PlaneFight/MainMenu.jpg");
 
 	int menu_pos_x = 555;
 	int menu_pos_y = 300;
 	int menu_pos_y_offset = 0;
 	
-	iStart = new Sprite("start_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
-	iStart2 = new Sprite("start_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iStart = new Sprite("PlaneFight/start_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iStart2 = new Sprite("PlaneFight/start_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
 	iStart2->hide();
 	menu_pos_y_offset += 50;
 
-	iRecords = new Sprite("records_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
-	iRecords2 = new Sprite("records_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iRecords = new Sprite("PlaneFight/records_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iRecords2 = new Sprite("PlaneFight/records_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
 	iRecords2->hide();
 	menu_pos_y_offset += 50;
 	
-	iCredits = new Sprite("credits_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
-	iCredits2 = new Sprite("credits_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iCredits = new Sprite("PlaneFight/credits_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iCredits2 = new Sprite("PlaneFight/credits_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
 	iCredits2->hide();
 	menu_pos_y_offset += 50;
 
-	iQuit = new Sprite("quit_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
-	iQuit2 = new Sprite("quit_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iQuit = new Sprite("PlaneFight/quit_0.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
+	iQuit2 = new Sprite("PlaneFight/quit_1.png", menu_pos_x, menu_pos_y+menu_pos_y_offset);
 	iQuit2->hide();
 
-	cursorSprite = new Sprite("cursor.png",0,0);
-	cursor = new Sprite("cursor_real.png",0,0);
+	cursorSprite = new Sprite("PlaneFight/cursor.png",0,0);
+	cursor = new Sprite("PlaneFight/cursor_real.png",0,0);
+
+	background->hide();
+	iStart->hide();
+	iRecords->hide();
+	iCredits->hide();
+	iQuit->hide();
+	cursorSprite->hide();
+	cursor->hide();
+}
+
+void MainMenu::start()
+{
+	looping = true;
+	Mouse::hide();
+
+	background->show();
+	iStart->show();
+	iRecords->show();
+	iCredits->show();
+	iQuit->show();
+	cursorSprite->show();
+	cursor->show();
 }
 
 bool MainMenu::active()
