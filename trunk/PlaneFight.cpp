@@ -28,12 +28,14 @@ void PlaneFight::start()
 	Game::refresh();
 
 	//carrega todos os modelos
+	backgroundMusic = new Music("sound/Track.mid");
 	menu.load();
 	loadGame();
 	//fim dos carregamentos
 	delete loading;
 
 	Game::setBackdropColor(0,0,0);
+	backgroundMusic->loop();
 
 	menu.start();
 }
@@ -43,16 +45,17 @@ void PlaneFight::loadGame()
 	gameRunning = false;
 
 	//init vars
-	PROFUNDIDADE_CENARIO = 20000;
-	LARGURA_CENARIO = 20000;
+	PROFUNDIDADE_CENARIO = 25000;
+	LARGURA_CENARIO = 800;
 
 	score = 0;
 
 	//Airplane control
 	acceleration	= 0.03;
 	friction		= 0.01;
-	speed			= 0;
-	maxSpeed		= 5;
+	speed			= 5;
+	maxSpeed		= 15;
+	bonusSpeed		= 10;
 
 	gravity			= 0.005;
 	flyAcceleration = 0.006;
@@ -61,7 +64,7 @@ void PlaneFight::loadGame()
 
 	rotation				= 0;
 	rotationAcceleration	= 0.1;
-	rotationReturning		= 0.5;
+	rotationReturning		= 0.7;
 	rotationFriction		= 0.03;
 	maxRotation				= 1;
 
@@ -70,13 +73,17 @@ void PlaneFight::loadGame()
 
 	//load contents
 	Game::setDir("Media/");
-	backgroundMusic = new Music("sound/Iron Maiden - Aces High.mid");
-	skysphere = new Object( SPHERE, -4000 );	
+	skysphere = new Object( SPHERE, -4000 );
 	skysphere->setLight(false);
-	skysphere->setTexture("textures/sky.jpg");
-	jogador = new Object("models/aviao.x");
-	jogador->addAnimation("Voaaa",0,101,10,LOOP);
+	skysphere->setTexture("textures/sky_grayscale.jpg");
+	
+	jogador = new Object(CUBE, 1);
+	jogadorSprite = new Object("models/aviao.x");
+	baseEnemy = new Object("models/Fokker/Fokker.X");
+	jogadorSprite->addAnimation("Voaaa",0,101,10,LOOP);
+
 	lives = new Lives( "icons/live.png", 3 );
+	hideGameObjs();
 }
 
 void PlaneFight::hideGameObjs()
@@ -84,28 +91,35 @@ void PlaneFight::hideGameObjs()
 	//cenario
 	skysphere->hide();
 	jogador->hide();
+	jogadorSprite->hide();
 	lives->hide();
+	baseEnemy->hide();
 }
 
 void PlaneFight::startGame()
 {
-	cenario = new Matrix( LARGURA_CENARIO, PROFUNDIDADE_CENARIO, 400, 400 );
-	cenario->prepareTexture("textures/grass_T.BMP");
-
+	cenario = new Matrix( LARGURA_CENARIO, PROFUNDIDADE_CENARIO, (int) LARGURA_CENARIO/50, (int) PROFUNDIDADE_CENARIO/50 );
+	cenario->randomize(40);
+	cenario->prepareTexture("textures/grass_grayscale.bmp");
+	cenario->update();
+	
 	Fog::enable( 255, 255, 255, 2500 );
+
+	new_enemy_interval = 200;
+	new_enemy_count = 0;
 	
 	//game sounds
-	backgroundMusic->loop();
-	jogador->scale(5);
-	jogador->fixPivot();
-	jogador->setPosition( 40, 5, 50 );
+	jogadorSprite->scale(5);
+	jogadorSprite->fixPivot();
+	jogador->setPosition( LARGURA_CENARIO/2 , 120, 50 );
+	jogadorSprite->setPosition( jogador );
 
 	camera = new Camera();
 	
 	lives->setPosition( 8, 6, 2 );
 
 	skysphere->show();
-	jogador->show();
+	jogadorSprite->show();
 	lives->show();
 }
 
@@ -164,8 +178,8 @@ void PlaneFight::gameLoop()
 
 
 	//Draw score
-	String::draw(10,50,"Score: ");
-	String::draw(66,50,score);
+	String::draw(10,36,"Score: ");
+	String::draw(66,36,score);
 
 	/*
 	Mouse::setPosition(400, 300);
@@ -215,34 +229,34 @@ void PlaneFight::gameLoop()
 	//left or right key --> rotate player 
 	if (Key::check(KEY_A) || Key::check(KEY_D))
 	{
-		jogador->rotateZ( rotation );
+		jogadorSprite->rotateZ( rotation );
 	} else {
 	//no rotation --> reset rotation to zero
-		if (jogador->getAngleZ() > rotationReturning)
+		if (jogadorSprite->getAngleZ() > rotationReturning)
 		{
-			jogador->rotateZ( -rotationReturning );
-		} else if (jogador->getAngleZ() < -rotationReturning)
+			jogadorSprite->rotateZ( -rotationReturning );
+		} else if (jogadorSprite->getAngleZ() < -rotationReturning)
 		{
-			jogador->rotateZ( rotationReturning );
+			jogadorSprite->rotateZ( rotationReturning );
 		}
 	}
 	
 	//speed friction
-	if ( speed >= friction )
+	if ( speed >= bonusSpeed )
 		speed -= friction;
 
 	//let airplane to fly...
-	if ( speed > maxSpeed-acceleration )
+	/*if ( speed > maxSpeed-acceleration )
 	{
-		if ( jogador->getPositionY() < 20 )
+		if ( jogador->getPositionY() < 200 )
 			if ( gravitySpeed < maxGravity )
 				gravitySpeed += flyAcceleration;
-	}
+	}*/
 	
 	//player allways try to move
 	jogador->move( speed );
 	jogador->positionY(gravitySpeed);
-	jogador->positionX( -rotation );
+	jogador->positionX( -(rotation*2) );
 
 	//restore rotation point
 	if ( rotation > rotationFriction)
@@ -253,7 +267,7 @@ void PlaneFight::gameLoop()
 		rotation += rotationFriction;
 	}
 
-	//gravitation
+	/*//gravitation
 	if ( jogador->getPositionY() > 1 )
 	{
 		if ( speed > maxSpeed-acceleration )
@@ -267,10 +281,10 @@ void PlaneFight::gameLoop()
 	} else 
 	{
 		gravitySpeed = 0;
-	}
+	}*/
 
 	//collision detection
-	vector<Object*>::iterator it = addPoints.begin();
+	/*vector<Object*>::iterator it = addPoints.begin();
 	while (it != addPoints.end())
 	{
 		Object* obj1 = (*it);
@@ -282,9 +296,37 @@ void PlaneFight::gameLoop()
 			score++;
 			delete obj1;
 		}
-	}
+	}*/
 	
+
+	/*float fix_dist_from_player = (cenario->getPositionZ() + (PROFUNDIDADE_CENARIO / 2)) + jogadorSprite->getSizeZ();
+	if ( jogador->getPositionZ() > fix_dist_from_player ) {
+		cenario->setPositionZ( jogador->getPositionZ() - (PROFUNDIDADE_CENARIO / 2) );
+	}*/
+	
+
+	if (new_enemy_count > new_enemy_interval)
+	{
+		new_enemy_count = 0;
+
+		//criar inimigo
+
+	}
+
 	skysphere->setPosition( jogador );
+	jogadorSprite->setPosition( jogador );
 	camera->setToFollow( jogador, ANGLE_Y, 40, 10, cameraSmooth, 1 );
 
+}
+
+void PlaneFight::createEnemy()
+{
+	Object* newEnemy = baseEnemy->clone();
+	newEnemy->show();
+	newEnemy->position(
+		random(LARGURA_CENARIO), 
+		100+random(40), 
+		jogador->getPositionZ() + 200 + random(100) 
+	);
+	enemies.push_back(newEnemy);
 }

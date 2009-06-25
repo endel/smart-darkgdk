@@ -35,6 +35,7 @@ public:
 	~Object();
 	char* getClassName();
 
+	Object *clone();
 
 
 
