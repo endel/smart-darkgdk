@@ -1,2 +1,2 @@
-==Lista de bugs conhecidos:==
-  # 
+==Bugs found==
+List all bugs and issues here.
